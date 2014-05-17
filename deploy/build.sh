@@ -24,10 +24,14 @@ for image in ${IMAGES[@]}; do
   LOGFILE="$LOGF_NAME$image-Docker-build.log"
   touch $LOGFILE
   date >> $LOGFILE
+  echo "Starting to build container $PREFIX$image Logging to  >> $LOGFILE"
   echo "Starting to build container $PREFIX$image " >> $LOGFILE
 
 # one line of work!  
   sudo docker build --rm -t "$PREFIX$image" . >>$LOGFILE 
+##TODO check for the image ID and push it into a repository
+##TODO check for the image ID and export it as a tar file
+
   
 # Logging
   echo "Finished to build container $PREFIX$image " >> $LOGFILE
@@ -36,4 +40,4 @@ for image in ${IMAGES[@]}; do
 done
 
 
-
+exit
