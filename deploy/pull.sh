@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #
-# Build all neccessary Docker container to run a zipkin tracing/logging app:
+# Pull all neccessary Docker container to run a zipkin tracing/logging app
+# off a regeistry server:
 #
 
 # Logfile name
@@ -18,6 +19,7 @@ REGISTRY_URL=registry.im7.de:5000/
 IMAGES=("base" "cassandra" "collector" "query" "web" "scribe")
 IMAGES=("base" "scribe")
 
+
 #########
 # For each container: change into the directory and build it; come back
 for image in ${IMAGES[@]}; do
@@ -28,14 +30,13 @@ for image in ${IMAGES[@]}; do
   LOGFILE="$LOGF_NAME$image-Docker-build.log"
   touch $LOGFILE
   date >> $LOGFILE
-  echo "Starting to build container $PREFIX$image Logging to  >> $LOGFILE"
-  echo "Starting to build container $PREFIX$image " >> $LOGFILE
+  echo "Starting to pull container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
+  echo "Starting to pull container $REGISTRY_URL$PREFIX$image " >> $LOGFILE
 
 # one line of work!  
-  sudo docker build --rm -t "$PREFIX$image" . >>$LOGFILE 
-## tag the image and push it into a repositoray
-  sudo docker tag  $PREFIX$image  $REGISTRY_URL$PREFIX$image
-  sudo docker push $REGISTRY_URL$PREFIX$image
+## pull the image off the repositoray and tag it
+  sudo docker pull $REGISTRY_URL$PREFIX$image
+  sudo docker tag $REGISTRY_URL$PREFIX$image $PREFIX$image
 ##TODO check for the image ID and export it as a tar file
 
   
@@ -44,7 +45,6 @@ for image in ${IMAGES[@]}; do
   date >> $LOGFILE
   popd
 done
-
 
 sudo docker images 
 sudo docker images >> $LOGFILE

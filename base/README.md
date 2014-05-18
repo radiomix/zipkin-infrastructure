@@ -7,7 +7,7 @@ collector, query, and web.
 On an AWS AMI of type 't1.micro' RAM was not enough to compile the basic zipkin package.
 Launching an instance of type 'm3.medium' with 16GB HDD did the job.
 
-# Ínspired by:
+# Inspired by
 For more details have a look at:
 
 <https://github.com/lispmeister/docker-zipkin/blob/master/README.md>
