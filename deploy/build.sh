@@ -35,6 +35,8 @@ for image in ${IMAGES[@]}; do
   sudo docker build --rm -t "$PREFIX$image" . >>$LOGFILE 
 ## tag the image and push it into a repositoray
   sudo docker tag  $PREFIX$image  $REGISTRY_URL$PREFIX$image
+
+##FIXME what if the repo is not available??
   sudo docker push $REGISTRY_URL$PREFIX$image
 ##TODO check for the image ID and export it as a tar file
 
