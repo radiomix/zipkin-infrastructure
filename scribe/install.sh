@@ -1,25 +1,53 @@
-echo "*** Adding Cassandra deb source"
-cat << EOF >> /etc/apt/sources.list
-deb http://www.apache.org/dist/cassandra/debian 11x main
-deb-src http://www.apache.org/dist/cassandra/debian 11x main
-EOF
+#!/bin/bash 
 
-echo "*** Importing Cassandra deb keys"
-gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
-gpg --export --armor F758CE318D77295D | apt-key add -
+#
+# source https://github.com/elemica/elemica2-operations/blob/master/docker/zipkin-scribed-docker.pdf
+#
 
-gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
-gpg --export --armor 2B5C1B00 | apt-key add -
-
-echo "*** Installing Cassandra"
 apt-get update
-apt-get install -y cassandra procps wget
+apt-get install -y make flex bison libtool libevent-dev automake
+apt-get install -y pkg-config libssl-dev libboost-all-dev libbz2-dev
+apt-get install -y build-essential g++ python-dev git
+apt-get install -y openjdk-6-jdk ant
+cd /var/tmp
+git clone https://github.com/apache/thrift.git
+cd thrift
+git fetch
+git checkout 0.9.x
+./bootstrap.sh
+./configure
+make
+make install
+cd tutorial/
+thrift -r -v --gen cpp tutorial.thrift
+cd ../contrib/
+cd fb303/
+./bootstrap.sh
+./configure CPPFLAGS="-DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H"
+make
+make install
+cd ../../
+cd lib
+cd py
+python setup.py install
+cd ../../
+cd contrib/fb303/py
+python setup.py install
+python -c 'import thrift' ; python -c 'import fb303'
+cd ../../../
+cd ..
+git clone https://github.com/facebook/scribe.git
+cd scribe/
+./bootstrap.sh
+./configure CPPFLAGS="-DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -DBOOST_FILESYSTEM_VERSION=2" \
+LIBS="-lboost_system -lboost_filesystem"
+make
+make install
+export LD_LIBRARY_PATH=/usr/local/lib
+cd lib/py
+python setup.py install
+python -c 'import scribe'
+ldconfig
+cd /var/tmp
+rm -rf scribe thrift
 
-echo "*** Patching Cassandra config"
-sed -i s/Xss180k/Xss256k/ /etc/cassandra/cassandra-env.sh
-mv /etc/cassandra/cassandra.yaml /etc/cassandra/cassandra.default.yaml
-
-echo "*** Fetch Schema"
-(cd /etc/cassandra; wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt)
-
-echo "*** Image build complete"
