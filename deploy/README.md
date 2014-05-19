@@ -10,6 +10,7 @@ Change into this directory and call the appropriate bash script to run the task.
 ##Variables
 
 | Variable | Description |
+|---------|---------|
 |`LOGNAME`  | Name of the log file |
 |`PREFIX`   | Prefix of the image/container |
 |`REGISTRY_URL`| URL of the registry to push and pull the container |
