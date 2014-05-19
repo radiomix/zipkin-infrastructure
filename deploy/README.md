@@ -13,9 +13,9 @@ Change into this directory and call the appropriate bash script to run the task.
 | Variable | Description | Note |
 |---------|:---------:|:-------:|
 |`LOGNAME`  | Name of the log file | Is written into this directory|
-|`PREFIX`   | Prefix of the image/container | Needs an ending forward slash `/`| 
-|`REGISTRY_URL`| URL of the registry to push and pull the container |
-|`IMAGES` | String with the container names to be manipulated  |
+|`PREFIX`   | Prefix of the image/container | This is part of the repository name| 
+|`REGISTRY_URL`| URL of the registry to push and pull the container | Needs a trailing forward slash `/`|
+|`IMAGES` | String with the container names to be manipulated  | |
 
 ##`build.sh`
 Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
