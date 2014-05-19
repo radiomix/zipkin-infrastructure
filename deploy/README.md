@@ -10,10 +10,10 @@ Change into this directory and call the appropriate bash script to run the task.
 ##Variables
 
 | Variable | Description |
-`LOGNAME`  | Name of the log file |
-`PREFIX`   | Prefix of the image/container |
-`REGISTRY_URL`| URL of the registry to push and pull the container |
-`IMAGES` | String with the container names to be manipulated  |
+|`LOGNAME`  | Name of the log file |
+|`PREFIX`   | Prefix of the image/container |
+|`REGISTRY_URL`| URL of the registry to push and pull the container |
+|`IMAGES` | String with the container names to be manipulated  |
 
 ##`build.sh`
 Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
