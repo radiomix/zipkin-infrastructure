@@ -6,13 +6,14 @@ to perform the tasks.
 
 ## Usage
 Change into this directory and call the appropriate bash script to run the task.
+`./build.sh`
 
 ##Variables
 
-| Variable | Description |
-|---------|:---------:|
-|`LOGNAME`  | Name of the log file |
-|`PREFIX`   | Prefix of the image/container |
+| Variable | Description | Note |
+|---------|:---------:|:-------:|
+|`LOGNAME`  | Name of the log file | Is written into this directory|
+|`PREFIX`   | Prefix of the image/container | Needs an ending forward slash `/`| 
 |`REGISTRY_URL`| URL of the registry to push and pull the container |
 |`IMAGES` | String with the container names to be manipulated  |
 
