@@ -1,8 +1,8 @@
-FROM debian:sid
-MAINTAINER Markus Fix "http://deeprecursion.com"
+FROM		ubuntu:12.04
+MAINTAINER 	Michael Klöckner <mkl AT im7 DOT de>
 
 RUN apt-get update
-RUN apt-get install -y git curl
+RUN apt-get install -y git curl wget unzip 
 RUN apt-get install -y scala 
 RUN git clone https://github.com/twitter/zipkin.git
 

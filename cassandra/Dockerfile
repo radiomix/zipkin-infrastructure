@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM elemica/zipkin-base
 MAINTAINER Markus Fix "http://deeprecursion.com"
 
 ADD install.sh /usr/local/bin/install
