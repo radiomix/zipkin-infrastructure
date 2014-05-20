@@ -15,8 +15,7 @@ PREFIX="elemica/zipkin-"
 REGISTRY_URL=registry.im7.de:5000/  
 
 # What containers to build
-IMAGES=("base" "cassandra" "collector" "query" "web" "scribe")
-IMAGES=("base" "scribe")
+IMAGES=("base" "cassandra" "collector" "query" "web" "fb-scribe")
 
 #########
 # For each container: change into the directory and build it; come back

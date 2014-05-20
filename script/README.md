@@ -1,4 +1,4 @@
-# Tools to manipulate containers
+# Scripts to manipulate containers
 
 This directory contains bash shel scripts to manipulate docker containers.
 Each operation is logged locally into a logfile. We use different scripts, 

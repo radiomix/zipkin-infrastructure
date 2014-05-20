@@ -31,8 +31,7 @@ ROOT_URL="http://deb.local:$PUBLIC_PORT"
 
 #TODO Read option string and jump if
 #if [[ $CLEANUP == "-y" ]]; then
-  SERVICES=("cassandra" "collector" "query" "web" "scribe")
-  SERVICES=("base" "scribe")
+  SERVICES=("cassandra" "collector" "query" "web" "fb-scribe")
   for i in "${SERVICES[@]}"; do
     echo "** Stopping zipkin-$i"
     sudo docker stop "${NAME_PREFIX}$i"
@@ -44,7 +43,7 @@ echo "** TESTING BASE "
 sudo docker run -d --name="${NAME_PREFIX}base" "${IMG_PREFIX}base"
 
 echo "** TESTING SCRIBE"
-sudo docker run -d --name="${NAME_PREFIX}scribe" "${IMG_PREFIX}scribe"
+sudo docker run -d --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe"
 
 echo "** END TESTING **"
 sudo docker ps 
@@ -65,8 +64,8 @@ echo docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --nam
 echo "** Starting zipkin-web"
 echo sudo docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web"
 
-echo "** Starting zipkin-scribe"
-echo docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}scribe" "${IMG_PREFIX}scribe"
+echo "** Starting zipkin-fb-scribe"
+echo docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe"
 
 
 exit
