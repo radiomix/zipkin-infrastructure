@@ -22,4 +22,13 @@ Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
 ##`pull.sh`
 Pulls all containers from `REGISTRY_URL` and tags them locally.
 ##`deploy.sh`
-Cleans up old running containers and restarts them.
+Cleans up old running containers and restarts them. It would be nice to be able to
+rename containers easyly, but [ container renaming #3036 ](https://github.com/dotcloud/docker/issues/3036) 
+does not describe a solution.
+### Usage
+'deploy.sh -s'  stops containers
+'deploy.sh -c'  stops containers and removes them
+'deploy.sh'	starts containers
+##utils.sh 
+This file contains functions for container manipulations
+

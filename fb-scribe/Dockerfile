@@ -1,8 +1,10 @@
 #
-# Dockerfile - Apache hadoop
+# Dockerfile - Facebook Scribed
 #
+# Source:	Yongbok Kim <ruo91@yongbok.net>
+
 FROM     ubuntu:12.04
-MAINTAINER Yongbok Kim <ruo91@yongbok.net>
+MAINTAINER 	Michael Klöckner <mkl AT im7 DOT de>
 
 # Last Package Update & Install
 RUN apt-get update && apt-get install -y curl supervisor openssh-server net-tools iputils-ping nano \
@@ -41,6 +43,15 @@ RUN ./configure CPPFLAGS="-DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -DBOOST_FILESYST
 RUN make 
 RUN make install
 
+# ENV
+ENV LD_LIBRARY_PATH /usr/local/lib
+RUN echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /etc/profile
+
+# Scribe python module
+WORKDIR /usr/local/src/scribe/lib/py 
+RUN python setup.py install
+
+##TODO configrue scribe
 
 # Port
 EXPOSE 22 1463
