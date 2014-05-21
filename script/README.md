@@ -6,9 +6,8 @@ to perform the tasks.
 
 ## Usage
 Change into this directory and call the appropriate bash script to run the task.
-`./build.sh`
 
-##Variables
+###Variables
 
 | Variable | Description | Note |
 |---------|:---------:|:-------:|
@@ -21,14 +20,20 @@ Change into this directory and call the appropriate bash script to run the task.
 Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
 ##`pull.sh`
 Pulls all containers from `REGISTRY_URL` and tags them locally.
-##`deploy.sh`
+##`stop.sh`
 Cleans up old running containers and restarts them. It would be nice to be able to
 rename containers easyly, but [ container renaming #3036 ](https://github.com/dotcloud/docker/issues/3036) 
 does not describe a solution.
-### Usage
-'deploy.sh -s'  stops containers
-'deploy.sh -c'  stops containers and removes them
-'deploy.sh'	starts containers
+'stop.sh -s|--stop'  	stops containers
+'stop.sh -c|--cleanup'  stops containers and removes them
+'stop.sh container'	stop this container
+'stop.sh -|--help'      this message
+
+##`start.sh`
+start.sh                 start all containers
+start.sh  container       start this container
+start.sh -h|--help       this message
+
 ##utils.sh 
-This file contains functions for container manipulations
+This file contains all configuration variables and functions for container manipulations
 
