@@ -25,15 +25,17 @@ case "$1" in
    LOGDATE="$(date '+%F-%M-%S')"
   for i in "${SERVICES[@]}"; do
     echo "** Commiting  zipkin-$i to ${IMG_PREFIX}$i:$LOGDATE"
-    ##TODO chef if container exists and then commit
-    sudo docker commit "${NAME_PREFIX}$i ${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
+    ##TODO check if container exists and then commit
+    echo "sudo docker commit zipkin-$i ${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
+    sudo docker commit "${NAME_PREFIX}$i" "${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
     echo "** Stopping zipkin-$i"
     sudo docker stop "${NAME_PREFIX}$i" &>/dev/null	#redirect stdout&stderror 
     echo "** Removing zipkin-$i"
     sudo docker rm "${NAME_PREFIX}$i"   &>/dev/null     
   done
-    sudo docker images | grep $LOGDATE
-    exit 
+  echo "** These images are in the local repository:" 
+  sudo docker images | grep $LOGDATE
+  exit 
 	;;
 # ----------------------------------------------------------- #
  -s|--stop)
