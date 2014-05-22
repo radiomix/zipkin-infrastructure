@@ -8,20 +8,10 @@
 # Logfile name
 LOGF_NAME="$(pwd)/$(date '+%F-%M-%S-')"
 
-# How we call the containers
-PREFIX="elemica/zipkin-"
-
-# registry and port, we push to 
-# my-registry.example.com:5000/  !! TRAILING FORWARDSLASH !! 
-REGISTRY_URL=registry.im7.de:5000/  
-
-# What containers to build
-IMAGES=("base" "cassandra" "collector" "query" "web" "fb-scribe")
-
 
 #########
 # For each container: change into the directory and build it; come back
-for image in ${IMAGES[@]}; do
+for image in ${SERVICES[@]}; do
   pushd "../$image"
   
 # Logging

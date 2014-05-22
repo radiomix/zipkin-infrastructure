@@ -8,7 +8,7 @@ to perform the tasks.
 Change into this directory and call the appropriate bash script to run the task.
 
 ###Variables
-
+All configuration variables are combined in one file `config.sh` and read by `utils.sh`.
 | Variable | Description | Note |
 |---------|:---------:|:-------:|
 |`LOGNAME`  | Name of the log file | Is written into this directory|
