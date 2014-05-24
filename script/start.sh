@@ -62,19 +62,19 @@ echo "**  Using container version: $CONTAINER_VERSION"
 # We expect them to be down!
 # ----------------------------------------------------------- #
   echo "** Starting zipkin-cassandra"
-  docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra" #&>/dev/null
-
+  PS=$(docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra") #&>/dev/null
+  
   echo "** Starting zipkin-collector"
-  docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:$COLLECTOR_PORT -p 9900:$COLLECTOR_MGT_PORT --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector"
+  PS=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:$COLLECTOR_PORT -p 9900:$COLLECTOR_MGT_PORT --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector") #&>/dev/null
 
   echo "** Starting zipkin-query"
-  docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --name="${NAME_PREFIX}query" "${IMG_PREFIX}query"
+  PS=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --name="${NAME_PREFIX}query" "${IMG_PREFIX}query") #&>/dev/null
 
   echo "** Starting zipkin-web"
-  docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web"
+  PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web") #&>/dev/null
 
   echo "** Starting zipkin-fb-scribe"
-  docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash
+  PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) #&>/dev/null
 
 
   echo "** Done Starting container "
