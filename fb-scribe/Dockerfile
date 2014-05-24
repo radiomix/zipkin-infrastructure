@@ -3,7 +3,7 @@
 #
 # Source:	Yongbok Kim <ruo91@yongbok.net>
 
-FROM     ubuntu:12.04
+FROM     	elemica/zipkin-base
 MAINTAINER 	Michael Klöckner <mkl AT im7 DOT de>
 
 # Last Package Update & Install
