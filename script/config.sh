@@ -29,3 +29,7 @@ LOGDATE="date '+%F-%M-%S')"
 
 #Author
 AUTHOR="Elemica Script"
+
+#Container versions to revert between latest and minus_one
+VERSION_LATEST="latest"
+VERSION_PREVIOUS="minus_one"

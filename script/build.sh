@@ -25,21 +25,21 @@ for image in ${SERVICES[@]}; do
   CWD=$(pwd)
   echo "Starting to build container $PREFIX$image logging to: " $LOGFILE
 
-# one line of work!  
-  sudo docker build --rm -t $PREFIX$image . # >> $LOGFILE 
+  BUILD=$(docker build --rm -t $PREFIX$image .)  >> $LOGFILE  	#get build output into variable
+  CID=$(echo $BUILD | sed  's/^.*built.//') &>/dev/null 	#extract container id
+
 ## tag the image and push it into a repositoray
-  sudo docker tag  $PREFIX$image  $REGISTRY_URL$PREFIX$image >> $LOGFILE
-
+  TAG=$(docker tag  $PREFIX$image  $REGISTRY_URL$PREFIX$image:$VERSION_LATEST) >> $LOGFILE
 ##FIXME what if the repo is not available??
-  sudo docker push $REGISTRY_URL$PREFIX$image  >> $LOGFILE
+  PUSH=$(docker push $REGISTRY_URL$PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
-
+exit
   echo "Finished to build container $PREFIX$image " >> $LOGFILE
   popd
 done
 
 
-sudo docker images >> $LOGFILE
-sudo docker images 
+docker images >> $LOGFILE
+docker images 
 
 exit

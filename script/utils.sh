@@ -23,7 +23,7 @@ getContainerIdByName(){
  fi
 
  RESULT=/tmp/result.txt
- sudo docker inspect $1  | grep ID > $RESULT 2>/dev/null
+ docker inspect $1  | grep ID > $RESULT 2>/dev/null
  sed -e 's/"ID": "//' -i $RESULT                       #remove the ID tag
  sed -e 's/"ContainerIDFile": "//' -i $RESULT          #remove the ContainerIdFile tag
  sed -e 's/",//g' -i $RESULT                           #remove the comma
@@ -45,16 +45,16 @@ stopContainer() {
      return 100
    fi
    echo "** Stoping Container $1"
-   sudo docker stop $1 &>/dev/null
+   docker stop $1 &>/dev/null
    if [ $? == 0 ]
    then
-     sudo docker ps -a | grep Exited | grep $1
+     docker ps -a | grep Exited | grep $1
      return 0
    else 
      getContainerIdByName $1
-     sudo docker stop $CONTAINER_ID 
+     docker stop $CONTAINER_ID 
    fi 
-  sudo docker ps -a | grep Exited | grep $CONTAINER_ID
+  docker ps -a | grep Exited | grep $CONTAINER_ID
   
 }
 

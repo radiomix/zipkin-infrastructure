@@ -26,15 +26,15 @@ case "$1" in
   for i in "${SERVICES[@]}"; do
     echo "** Commiting  zipkin-$i to ${IMG_PREFIX}$i:$LOGDATE"
     ##TODO check if container exists and then commit
-    echo "sudo docker commit zipkin-$i ${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
-    sudo docker commit "${NAME_PREFIX}$i" "${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
+    echo "docker commit zipkin-$i ${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
+    docker commit "${NAME_PREFIX}$i" "${IMG_PREFIX}$i:$LOGDATE" #&>/dev/null	#redirect stdout&stderror 
     echo "** Stopping zipkin-$i"
-    sudo docker stop "${NAME_PREFIX}$i" &>/dev/null	#redirect stdout&stderror 
+    docker stop "${NAME_PREFIX}$i" &>/dev/null	#redirect stdout&stderror 
     echo "** Removing zipkin-$i"
-    sudo docker rm "${NAME_PREFIX}$i"   &>/dev/null     
+    docker rm "${NAME_PREFIX}$i"   &>/dev/null     
   done
   echo "** These images are in the local repository:" 
-  sudo docker images | grep $LOGDATE
+  docker images | grep $LOGDATE
   exit 
 	;;
 # ----------------------------------------------------------- #
@@ -44,8 +44,8 @@ case "$1" in
     RUNNING=0
     for i in "${SERVICES[@]}"; do
       echo "** Stopping zipkin-$i"
-      sudo docker stop "${NAME_PREFIX}$i" &>/dev/null	#redirect stdout&stderror 
-      sudo docker ps -a | grep Exited  | grep $IMG_PREFIX &>/dev/null
+      docker stop "${NAME_PREFIX}$i" &>/dev/null	#redirect stdout&stderror 
+      docker ps -a | grep Exited  | grep $IMG_PREFIX &>/dev/null
       if [ $? -eq 0  ]
       then 
 	  (( RUNNING += 1 ))
@@ -55,7 +55,7 @@ case "$1" in
     then
       echo "** These containers are in the way "
       echo "** "
-      sudo docker ps -a | grep Exited 
+      docker ps -a | grep Exited 
       echo "** "
       echo "** You can remove all containers by issuning command"
       echo "** ./stop.sh --cleanup"

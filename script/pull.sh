@@ -5,27 +5,41 @@
 # off a regeistry server:
 #
 
-# Logfile name
-LOGF_NAME="$(pwd)/$(date '+%F-%M-%S-')"
+source ./utils.sh
+
+CONTAINER_VERSION=$VERSION_LATEST
+
+# test for input parameter
+case "$1" in
+# ----------------------------------------------------------- #
+ -l|--latest)
+        CONTAINER_VERSION=$VERSION_LATEST
+        ;;
+# ----------------------------------------------------------- #
+ -h|--help|*)
+  echo "
+ usage: 
+stop.sh --latest       stop all containers tagged as latest
+stop.sh -h|--help      this message
+      "
+  exit
+        ;;
+esac
+
 
 
 #########
 # For each container: change into the directory and build it; come back
 for image in ${SERVICES[@]}; do
   pushd "../$image"
+  #Retagging 'latest' to 'minus_one' is ONLY done by the registry!!"
+  #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:VERSION_MINUS_ONE
   
-# Logging
-  CWD=$(pwd)
-  LOGFILE="$LOGF_NAME$image-Docker-build.log"
-  touch $LOGFILE
-  date >> $LOGFILE
+## pull the latest image off the repositoray and tag it
   echo "Starting to pull container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
   echo "Starting to pull container $REGISTRY_URL$PREFIX$image " >> $LOGFILE
-
-# one line of work!  
-## pull the image off the repositoray and tag it
-  sudo docker pull $REGISTRY_URL$PREFIX$image
-  sudo docker tag $REGISTRY_URL$PREFIX$image $PREFIX$image
+  docker pull $REGISTRY_URL$PREFIX$image
+  docker tag $REGISTRY_URL$PREFIX$image $IMG_PREFIX$image:$VERSION_LATEST
 ##TODO check for the image ID and export it as a tar file
 
   
@@ -35,7 +49,6 @@ for image in ${SERVICES[@]}; do
   popd
 done
 
-sudo docker images 
-sudo docker images >> $LOGFILE
+#docker images 
 
 exit
