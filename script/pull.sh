@@ -33,7 +33,8 @@ esac
 for image in ${SERVICES[@]}; do
   pushd "../$image"
   #Retagging 'latest' to 'minus_one' is ONLY done by the registry!!"
-  #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:VERSION_MINUS_ONE
+  #We just retag 'latest' to $LOGDATE in order to retrieve it later "
+  docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$LOGDATE
   
 ## pull the latest image off the repositoray and tag it
   echo "Starting to pull container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
