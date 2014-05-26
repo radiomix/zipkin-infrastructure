@@ -22,7 +22,6 @@ case "$1" in
  -c|--cleanup)
 # ----------------------------------------------------------- #
   echo " Cleaning up  services  "
-   LOGDATE="$(date '+%F-%M-%S')"
   for i in "${SERVICES[@]}"; do
     echo "** Commiting  zipkin-$i to ${IMG_PREFIX}$i:$LOGDATE"
     ##TODO check if container exists and then commit
