@@ -13,6 +13,32 @@ LOGFILE="$(pwd)/$(date '+%F-%M-%S-')Docker-build.log"
 date  >> $LOGFILE
 
 
+ 
+# test for input parameter
+case "$1" in
+# ----------------------------------------------------------- #
+ -b|--base)
+        SERVICES="base"
+	echo "** Building base container only "
+        ;;
+# ----------------------------------------------------------- #
+ -z|--zipkin)
+       	for image in ${SERVICES[@]}; do
+	   echo "** Prepare to build  container type $i "
+	done	
+        
+        ;;
+# ----------------------------------------------------------- #
+ -h|--help|*)
+  echo "
+ usage: 
+build.sh -b|--base 	build only base container
+build.sh -z| --zipkin   build all zipkin containers 
+build.sh -h|--help      this message
+      "
+  exit
+        ;;
+esac
 
 
 

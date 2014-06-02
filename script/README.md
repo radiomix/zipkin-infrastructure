@@ -28,6 +28,12 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 
 ##build.sh
 Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
+### Usage
+```bash
+build.sh -b|--base      build only base container
+build.sh -z| --zipkin   build all zipkin containers 
+build.sh -h|--help      this message
+```
 ##pull.sh
 Pull fresh containers from `REGISTRY_URL` and tag them locally as *latest*.
 ##stop.sh
