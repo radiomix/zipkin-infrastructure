@@ -7,26 +7,15 @@
 source ./utils.sh
 
 
-# Logfile name
-LOGFILE="$(pwd)/$(date '+%F-%M-%S-')Docker-build.log"
-
-date  >> $LOGFILE
-
-
  
 # test for input parameter
 case "$1" in
 # ----------------------------------------------------------- #
  -b|--base)
         SERVICES="base"
-	echo "** Building base container only "
         ;;
 # ----------------------------------------------------------- #
  -z|--zipkin)
-       	for image in ${SERVICES[@]}; do
-	   echo "** Prepare to build  container type $i "
-	done	
-        
         ;;
 # ----------------------------------------------------------- #
  -h|--help|*)
@@ -40,32 +29,32 @@ build.sh -h|--help      this message
         ;;
 esac
 
-
+for i in ${SERVICES[@]}; do
+  echo "** Prepare to build  container type $i "
+done	
 
 #########
 # For each container: change into the directory and build it; come back
 for image in ${SERVICES[@]}; do
   pushd "../$image"
-  
-# Logging
-  CWD=$(pwd)
-  echo "Starting to build container $PREFIX$image logging to: " $LOGFILE
-
-  BUILD=$(docker build --rm -t $PREFIX$image .)  >> $LOGFILE  	#get build output into variable
+  CWD=$(pwd) >>/dev/null
+  echo "Starting to build container $IMG_PREFIX$image "
+  echo "  in directory $CWD  "
+  echo "  logging to $CWD/$LOGFILE"
+  docker build --rm -t $IMG_PREFIX$image . >> $LOGFILE  	#get build output into logfile
+  BUILD=$(cat $LOGFILE) 
   CID=$(echo $BUILD | sed  's/^.*built.//') &>/dev/null 	#extract container id
-
 ## tag the image and push it into a repositoray
-  TAG=$(docker tag  $PREFIX$image  $REGISTRY_URL$PREFIX$image:$VERSION_LATEST) >> $LOGFILE
+  TAG=$(docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST) >> $LOGFILE
 ##FIXME what if the repo is not available??
-  PUSH=$(docker push $REGISTRY_URL$PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
+  PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
 exit
-  echo "Finished to build container $PREFIX$image " >> $LOGFILE
+  echo "Finished to build container $IMG_PREFIX$image " 
   popd
 done
 
 
-docker images >> $LOGFILE
 docker images 
 
 exit

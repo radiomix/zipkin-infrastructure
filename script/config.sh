@@ -25,7 +25,11 @@ ROOT_URL="http://deb.local:$PUBLIC_PORT"
 SERVICES=("cassandra" "collector" "query" "web" "fb-scribe")
 
 #Log date
-LOGDATE="date '+%F-%M-%S')"
+LOGDATE=$(date '+%F-%H-%M-%S')
+
+# Logfile name
+LOGFILE=$LOGDATE"-Docker-build.log"
+
 
 #Author
 AUTHOR="Elemica Script"

@@ -56,7 +56,7 @@ case "$1" in
       echo "** "
       docker ps -a | grep Exited 
       echo "** "
-      echo "** You can remove all containers by issuning command"
+      echo "** You can remove all containers by issuing command"
       echo "** ./stop.sh --cleanup"
     fi
     echo "** EXIT "
