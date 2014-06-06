@@ -58,3 +58,24 @@ start.sh -h|--help      this message
 ##utils.sh 
 This file contains all configuration variables and functions for container manipulations
 
+####TODO
+ * After pushing a container to the repo, docker answers with the correct URL to review the tags for that image. 
+  We need to remember this URL to later delete the container from the registry.
+
+`    docker push registry.im7.de:5000/hello/world 
+    The push refers to a repository [registry.im7.de:5000/hello/world] (len: 1)
+    Sending image list
+    Pushing repository registry.im7.de:5000/hello/world (1 tags)
+    Image 511136ea3c5a already pushed, skipping
+    Image 42eed7f1bf2a already pushed, skipping
+    Image 120e218dd395 already pushed, skipping
+    Image a9eb17255234 already pushed, skipping
+    Image 25a64a992f61 already pushed, skipping
+    Image 3b420170fc46 already pushed, skipping
+    Image 82a51d5683a2 already pushed, skipping
+    Pushing tag for rev [82a51d5683a2] on {http://registry.im7.de:5000/v1/repositories/hello/world/tags/latest} 
+`
+In order to delete the container from the registry, we have to delete both local containers `hello/world` and `registry.im7.de:5000/hello/world`, to inshure, docker does not remember locally, what image was pushed to the registry. 
+We can then use the last URL to delete the container like this:
+`url -X DELETE http://registry.im7.de:5000/v1/repositories/hello/world/`
+

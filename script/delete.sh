@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #
-# Pull all neccessary Docker container to run a zipkin tracing/logging app
-# off a regeistry server:
+# Delete all neccessary Docker container to run a zipkin tracing/logging app
+# from a regeistry server:
 #
 
 source ./utils.sh
@@ -19,8 +19,8 @@ case "$1" in
  -h|--help|*)
   echo "
  usage: 
-stop.sh --latest       stop all containers tagged as latest
-stop.sh -h|--help      this message
+delete.sh --latest       delete all containers tagged as latest
+delete.sh -h|--help      this message
       "
   exit
         ;;
@@ -37,12 +37,14 @@ for image in ${SERVICES[@]}; do
   #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$LOGDATE
   
 ## pull the latest image off the repositoray and tag it
-  echo "Starting to pull container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
-  echo "Starting to pull container $REGISTRY_URL$PREFIX$image " >> $LOGFILE
-  #docker pull $REGISTRY_URL$PREFIX$image
-  docker pull $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST
-  #docker tag $REGISTRY_URL$PREFIX$image $IMG_PREFIX$image:$VERSION_LATEST
-  docker tag $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$VERSION_LATEST
+  echo "Starting to delete container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
+  echo "Starting to delete container $REGISTRY_URL$PREFIX$image " >> $LOGFILE
+#
+# We push the container, to get a valid URL to delete this container
+#
+  DEL_CONTAINER=$(docker push $REGISTRY_URL$PREFIX$image)
+ echo "Container URL $DEL_CONTAINER"
+
 ##TODO check for the image ID and export it as a tar file
 
   

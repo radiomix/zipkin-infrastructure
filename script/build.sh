@@ -41,15 +41,16 @@ for image in ${SERVICES[@]}; do
   echo "Starting to build container $IMG_PREFIX$image "
   echo "  in directory $CWD  "
   echo "  logging to $CWD/$LOGFILE"
-  docker build --rm -t $IMG_PREFIX$image . >> $LOGFILE  	#get build output into logfile
-  BUILD=$(cat $LOGFILE) 
-  CID=$(echo $BUILD | sed  's/^.*built.//') &>/dev/null 	#extract container id
+  docker build --rm -t $IMG_PREFIX$image . #>> $LOGFILE  	#get build output into logfile
+  #BUILD=$(cat $LOGFILE) 
+  #CID=$(echo $BUILD | sed  's/^.*built.//') &>/dev/null 	#extract container id
 ## tag the image and push it into a repositoray
-  TAG=$(docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST) >> $LOGFILE
+  #TAG=$(docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST) >> $LOGFILE
+  docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST #>> $LOGFILE
 ##FIXME what if the repo is not available??
-  PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
+  #PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
+  docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  #>> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
-exit
   echo "Finished to build container $IMG_PREFIX$image " 
   popd
 done
