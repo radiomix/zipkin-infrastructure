@@ -19,8 +19,8 @@ case "$1" in
  -h|--help|*)
   echo "
  usage: 
-stop.sh --latest       stop all containers tagged as latest
-stop.sh -h|--help      this message
+pull.sh --latest       pull all containers tagged as latest
+pull.sh -h|--help      this message
       "
   exit
         ;;
