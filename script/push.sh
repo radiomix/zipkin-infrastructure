@@ -21,9 +21,9 @@ case "$1" in
  -h|--help|*)
   echo "
  usage: 
-build.sh -b|--base 	build only base container
-build.sh -z| --zipkin   build all zipkin containers 
-build.sh -h|--help      this message
+push.sh -b|--base      push only base container
+push.sh -z| --zipkin   push all zipkin containers 
+push.sh -h|--help      this message
       "
   exit
         ;;
@@ -38,21 +38,17 @@ done
 for image in ${SERVICES[@]}; do
   pushd "../$image"
   CWD=$(pwd) >>/dev/null
-  echo "Starting to build container $IMG_PREFIX$image "
-  echo "  in directory $CWD  "
+  echo "Starting to push container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
   echo "  logging to $CWD/$LOGFILE"
-  docker build --rm -t $IMG_PREFIX$image . #>> $LOGFILE  	#get build output into logfile
-  #BUILD=$(cat $LOGFILE) 
-  #CID=$(echo $BUILD | sed  's/^.*built.//') &>/dev/null 	#extract container id
-## tag the image and push it into a repositoray
-  #TAG=$(docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST) >> $LOGFILE
-  docker tag  $IMG_PREFIX$image  $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST #>> $LOGFILE
+##FIXME what if the repo is not available??
+  #PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
+  docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  #>> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
-  echo "Finished to build container $IMG_PREFIX$image " 
+  echo "Finished to push container $IMG_PREFIX$image " 
   popd
 done
 
 
-docker images 
+docker images | xargs grep $REGISTRY_URL
 
 exit

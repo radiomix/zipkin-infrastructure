@@ -27,13 +27,16 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 |`VERSION_PREVIOUS`| Tag of the previous version||
 
 ##build.sh
-Builds all containers locally, tags them and pushes them into `REGISTRY_URL`.
+Builds containers locally and  tags them as `REGISTRY_URL`.
 ### Usage
 ```bash
 build.sh -b|--base      build only base container
 build.sh -z| --zipkin   build all zipkin containers 
 build.sh -h|--help      this message
 ```
+##push.sh
+Push containers taged as *latest* to `REGISTRY_URL`.
+##stop.sh
 ##pull.sh
 Pull fresh containers from `REGISTRY_URL` and tag them locally as *latest*.
 ##stop.sh
