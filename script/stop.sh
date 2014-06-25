@@ -32,7 +32,7 @@ case "$1" in
     echo "** Removing zipkin-$i"
     docker rm "${NAME_PREFIX}$i"   &>/dev/null     
   done
-  echo "** These images are in the local repository:" 
+  echo "** These containers are stored as images in the local repository:" 
   docker images | grep $LOGDATE
   exit 
 	;;
