@@ -57,4 +57,4 @@ RUN python setup.py install
 EXPOSE 22 1463
 
 # Daemon
-#CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
