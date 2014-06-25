@@ -12,7 +12,7 @@ source ./utils.sh
 case "$1" in
 # ----------------------------------------------------------- #
  -b|--base)
-        SERVICES="base"
+        SERVICES=(base)
         ;;
 # ----------------------------------------------------------- #
  -z|--zipkin)
@@ -49,6 +49,6 @@ for image in ${SERVICES[@]}; do
 done
 
 
-docker images | xargs grep $REGISTRY_URL
+docker images | grep $REGISTRY_URL
 
 exit
