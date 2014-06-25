@@ -23,6 +23,12 @@ ROOT_URL="http://deb.local:$PUBLIC_PORT"
 
 #All containers
 SERVICES=("cassandra" "collector" "query" "web" "fb-scribe")
+#All zipkin containers
+ZIPKIN_SERVICES=("cassandra" "collector" "query" "web")
+#fb scribe client container
+SCRIBE_SERVICES=("fb-scribe")
+
+
 
 #Log date
 LOGDATE=$(date '+%F-%H-%M-%S')
