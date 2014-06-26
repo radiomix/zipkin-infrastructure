@@ -1,59 +1,42 @@
 #!/bin/bash
 
 #
-# Delete all neccessary Docker container to run a zipkin tracing/logging app
+# Delete Docker container to run a zipkin tracing/logging app
 # from a regeistry server:
+# We expect the first parameter to be a valid zipkin service as
+# defined in file config.sh in the array ${SERVICES[@]}
 #
 
 source ./utils.sh
 
 CONTAINER_VERSION=$VERSION_LATEST
 
-# test for input parameter
-case "$1" in
-# ----------------------------------------------------------- #
- -l|--latest)
-        CONTAINER_VERSION=$VERSION_LATEST
-        ;;
-# ----------------------------------------------------------- #
- -h|--help|*)
-  echo "
- usage: 
-delete.sh --latest       delete all containers tagged as latest
-delete.sh -h|--help      this message
-      "
-  exit
-        ;;
-esac
-
-
+#is first parameter a valid zipkin service?
+image=$1
+if isZipkinService $image ; 
+then echo "** Preparing Zipkin service $image"; 
+else 
+    showUsage $0 $image
+    exit 100
+fi
 
 #########
-# For each container: change into the directory and build it; come back
-for image in ${SERVICES[@]}; do
-  pushd "../$image"
-  #Retagging 'latest' to 'minus_one' is ONLY done by the registry!!"
-  #We just retag 'latest' to $LOGDATE in order to retrieve it later "
-  #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$LOGDATE
   
 ## pull the latest image off the repositoray and tag it
-  echo "Starting to delete container $REGISTRY_URL$PREFIX$image Logging to  >> $LOGFILE"
-  echo "Starting to delete container $REGISTRY_URL$PREFIX$image " >> $LOGFILE
-#
+echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image Logging to  >> $LOGFILE"
+echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image " >> $LOGFILE
+
 # We push the container, to get a valid URL to delete this container
-#
-  DEL_CONTAINER=$(docker push $REGISTRY_URL$PREFIX$image)
- echo "Container URL $DEL_CONTAINER"
+DEL_CONTAINER=$(docker push $REGISTRY_URL$PREFIX$image)
+echo "** Container URL $DEL_CONTAINER for container  $REGISTRY_URL$IMG_PREFIX$image"
 
-##TODO check for the image ID and export it as a tar file
+#we untag and delete the container/image locally
+docker rmi $REGISTRY_URL$IMG_PREFIX$image &>/dev/null
+docker rmi $IMG_PREFIX$image &>/dev/null
 
-  
 # Logging
-  echo "Finished to build container $PREFIX$image " >> $LOGFILE
-  date >> $LOGFILE
-  popd
-done
+echo "** Finished to delete container $IMG_PREFIX$image " >> $LOGFILE
+date >> $LOGFILE
 
-#docker images 
-
+echo "** Finished to delete container $IMG_PREFIX$image " 
 exit

@@ -28,11 +28,6 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 
 ##build.sh
 Builds containers locally and  tags them as `REGISTRY_URL`.
-### Usage
-```bash
-build.sh -b|--base      build only base container
-build.sh -z| --zipkin   build all zipkin containers 
-build.sh -h|--help      this message
 ```
 ##push.sh
 Push containers taged as *latest* to `REGISTRY_URL`.
@@ -43,24 +38,13 @@ Pull fresh containers from `REGISTRY_URL` and tag them locally as *latest*.
 Cleans up old running containers and restarts them. It would be nice to be able to
 rename containers easyly, but [ container renaming #3036 ](https://github.com/dotcloud/docker/issues/3036) 
 does not describe a solution.
-### Usage
-```bash
-stop.sh -s|--stop  	stops containers
-stop.sh -c|--cleanup	stops containers and removes them
-stop.sh container	stop this container
-stop.sh -|--help	this message
-```
 ##start.sh
-### Usage
-```bash
-start.sh  --latest      start all containers tagged as latest
-start.sh  --minus_one	start all containers tagged as minus_one 
-start.sh -h|--help      this message
-```
-
+##test.sh
+Runs all scripts with all containers
 ##utils.sh 
 This file contains all configuration variables and functions for container manipulations
-
+##config.sh
+This file contains variables to configure the bash scripts
 ####TODO
  * After pushing a container to the repo, docker answers with the correct URL to review the tags for that image. 
   We need to remember this URL to later delete the container from the registry.

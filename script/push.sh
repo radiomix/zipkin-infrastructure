@@ -6,49 +6,33 @@
 
 source ./utils.sh
 
+#is first parameter a valid zipkin service?
+image=$1
+if isZipkinService $image ;
+then echo "** Preparing Zipkin service $image";
+else
+    showUsage $0 $image
+    exit 100
+fi
 
- 
-# test for input parameter
-case "$1" in
-# ----------------------------------------------------------- #
- -b|--base)
-        SERVICES=(base)
-        ;;
-# ----------------------------------------------------------- #
- -z|--zipkin)
-        ;;
-# ----------------------------------------------------------- #
- -h|--help|*)
-  echo "
- usage: 
-push.sh -b|--base      push only base container
-push.sh -z| --zipkin   push all zipkin containers 
-push.sh -h|--help      this message
-      "
-  exit
-        ;;
-esac
 
-for i in ${SERVICES[@]}; do
-  echo "** Prepare to build  container type $i "
-done	
 
 #########
 # For each container: change into the directory and build it; come back
-for image in ${SERVICES[@]}; do
-  pushd "../$image"
-  CWD=$(pwd) >>/dev/null
-  echo "Starting to push container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
-  echo "  logging to $CWD/$LOGFILE"
-##FIXME what if the repo is not available??
-  #PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
-  docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  #>> $LOGFILE
+pushd "../$image" &>/dev/null 
+CWD=$(pwd) &>/dev/null
+echo "Starting to push container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
+echo "  logging to $CWD/$LOGFILE"
+##TODO what if the repo is not available??
+#PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
+docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  #>> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
-  echo "Finished to push container $IMG_PREFIX$image " 
-  popd
-done
 
+echo "Finished to push container $IMG_PREFIX$image " >> $LOGFILE 
+docker images | grep $REGISTRY_URL >> $LOGFILE
+date >> $LOGFILE
 
+echo "Finished to push container $IMG_PREFIX$image " 
 docker images | grep $REGISTRY_URL
 
 exit
