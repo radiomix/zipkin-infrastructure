@@ -28,7 +28,6 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 
 ##build.sh
 Builds containers locally and  tags them as `REGISTRY_URL`.
-```
 ##push.sh
 Push containers taged as *latest* to `REGISTRY_URL`.
 ##stop.sh
