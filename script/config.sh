@@ -19,7 +19,7 @@ WEB_PORT="8080"
 COLLECTOR_PORT="9410"
 COLLECTOR_MGT_PORT="9900"
 QUERY_PORT="9411"
-
+##FIXME http://localhost:$PUBLIC_PORT
 ROOT_URL="http://deb.local:$PUBLIC_PORT"
 
 ######################################
@@ -48,7 +48,7 @@ LOGDIR=../log/
 LOGFILE=$LOGDIR$NAME_PREFIX"docker.log"
 ######################################
 # SILENT=true   dont output anything
-# To run without logging int $LOGFILE uncomment next line  
+# To run without logging into $LOGFILE uncomment next line  
 #SILENT=true
 
 
