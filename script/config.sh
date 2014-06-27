@@ -4,14 +4,14 @@
 # Configuration
 #
 # How we call the containers
-IMG_PREFIX="junk/zipkin-"  #MKL
+IMG_PREFIX="elemica/zipkin-"  L
 
 #Container name prefix
 NAME_PREFIX="zipkin-"
 
 # registry and port, we push to 
 # my-registry.example.com:5000/  !! TRAILING FORWARDSLASH !! 
-REGISTRY_URL=localhost:5000/  #MKL
+REGISTRY_URL=registry.elemica.com:5000/  
  
 ######################################
 #Ports to be exposed between the containers
