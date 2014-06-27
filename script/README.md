@@ -8,11 +8,10 @@ to perform the tasks.
 We expect, that the caller of these scripts is in the sudo group and we can call the `docker` 
 command right from the command line. 
 
-## Usage
-Change into this directory and call the appropriate bash script to run the task.
-
-###Variables
+##Variables
 All configuration variables are combined in one file `config.sh` and read by `utils.sh`.
+###config.sh
+This file contains variables to configure the bash scripts
 
 | Variable | Description | Note |
 |---------|:---------:|:-------:|
@@ -28,32 +27,76 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 |`VERSION_LATEST`| Tag of the latest version|Used to tag the latest version of Container|
 |`VERSION_PREVIOUS`| Tag of the previous version||
 |`SILENT`| Toggle Logging| If set to true, nothing is logged into `LOGFILE`|
+###utils.sh 
+This file contains functions for container manipulations.
 
-##build.sh
-Builds containers locally and  tags them as `REGISTRY_URL`.
-##push.sh
-Push containers taged as *latest* to `REGISTRY_URL`.
-##stop.sh
-##pull.sh
-Pull fresh containers from `REGISTRY_URL` and tag them locally as *latest*.
-##stop.sh
-Cleans up old running containers and restarts them. It would be nice to be able to
+## Shell scripts
+###  Usage
+Change into this directory and call the appropriate bash script with a container name
+as defined in  `SERVICES` to run the task.
+
+#### Example
+`./build.sh web`
+
+Any script provided with an argument that does not convert to a zipkin container does show the help message.
+```
+./build.sh foo
+** ERROR :foo: NO Zipkin Service
+** please provide a valid Zipkin Service: 
+** base cassandra collector query web fb-scribe
+Usage:
+ ./build.sh base 
+ ./build.sh cassandra 
+ ./build.sh collector 
+ ./build.sh query 
+ ./build.sh web 
+ ./build.sh fb-scribe 
+** EXIT 
+
+```
+####build.sh
+Builds a container locally and  tags them as `REGISTRY_URL`.
+####push.sh
+Pushs a container taged as *latest* to `REGISTRY_URL`.
+####pull.sh
+Pulls a fresh container from `REGISTRY_URL` and tags it locally as *latest*.
+####stop.sh
+Stops a container. It would be nice to be able to
 rename containers easyly, but [ container renaming #3036 ](https://github.com/dotcloud/docker/issues/3036) 
 does not describe a solution.
-##start.sh
-##test.sh
-Runs all scripts with all containers
-##utils.sh 
-This file contains all configuration variables and functions for container manipulations
-##config.sh
-This file contains variables to configure the bash scripts
+####start.sh
+Checks, if a container of this name is runnung and if not, start this container.
+####cleanup.sh
+Kills and removes a container.
+####delete.sh
+Tries to delete a container from `REGISTRY_URL` and locally
+.
+###Test
+####test.sh
+Runs all scripts with all containers. 
+
+###TODO
  * After pushing a container to the repo, docker answers with the correct URL to review the tags for that image. 
   We need to remember this URL to later delete the container from the registry.
 
-```   docker push registry.im7.de:5000/hello/world 
-    Pushing tag for rev [82a51d5683a2] on {http://registry.im7.de:5000/v1/repositories/hello/world/tags/latest} 
-```   
-In order to delete the container from the registry, we have to delete both local containers `hello/world` and `registry.im7.de:5000/hello/world`, to inshure, docker does not remember locally, what image was pushed to the registry. 
+``` 
+docker push registry.example.com:5000/hello/world` 
+The push refers to a repository [registry.example.com:5000/hello/world] (len: 1)
+Sending image list
+Pushing repository registry.example.com:5000/hello/world (1 tags)
+Image 511136ea3c5a already pushed, skipping
+Image 42eed7f1bf2a already pushed, skipping
+Image 120e218dd395 already pushed, skipping
+Image a9eb17255234 already pushed, skipping
+Image 25a64a992f61 already pushed, skipping
+Image 3b420170fc46 already pushed, skipping
+Image 82a51d5683a2 already pushed, skipping
+Pushing tag for rev [82a51d5683a2] on {http://registry.example.com:5000/v1/repositories/hello/world/tags/latest} 
+```
+   
+>In order to delete the container from the registry, we have to delete both local containers `hello/world` and `registry.example.com:5000/hello/world`, to inshure, docker does not remember locally, what image was pushed to the registry. 
 We can then use the last URL to delete the container like this:
-`url -X DELETE http://registry.im7.de:5000/v1/repositories/hello/world/`
 
+`curl -X DELETE http://registry.example.com:5000/v1/repositories/hello/world/`
+* Delete an Image in the registry.
+* Evaluate the test results.
