@@ -4,7 +4,7 @@
 # Configuration
 #
 # How we call the containers
-IMG_PREFIX="elemica/zipkin-"  L
+IMG_PREFIX="elemica/zipkin-"  
 
 #Container name prefix
 NAME_PREFIX="zipkin-"
