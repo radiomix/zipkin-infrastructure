@@ -25,17 +25,17 @@ fi
 #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$LOGDATE
   
 ## pull the latest image off the repositoray and tag it
-echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image Logging to  >> $LOGFILE"
-echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image " >> $LOGFILE
-docker pull $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST
-docker tag $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$VERSION_LATEST
+echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image Logging to  &>> $LOGFILE"
+echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image " &>> $LOGFILE
+docker pull $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST &>> $LOGFILE
+docker tag $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$VERSION_LATEST &>> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
 
   
 # Logging
-docker images | grep $IMG_PREFIX$image >> $LOGFILE
-echo "** Finished to pull container $IMG_PREFIX$image " >> $LOGFILE
-date >> $LOGFILE
+docker images | grep $IMG_PREFIX$image &>> $LOGFILE
+echo "** Finished to pull container $IMG_PREFIX$image " &>> $LOGFILE
+date &>> $LOGFILE
 
 echo "** Finished to pull container $IMG_PREFIX$image "
 exit

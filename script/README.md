@@ -21,10 +21,13 @@ All configuration variables are combined in one file `config.sh` and read by `ut
 |`NAME_PREFIX`   | Prefix of the container | This is part of the repository name| 
 |`REGISTRY_URL`| URL of the registry to push and pull the container | Needs a trailing forward slash `/`|
 |`SERVICES` | String with the container names to be manipulated  | |
-|`LOGDATE`| Date part of the log file name| Used to log each container build process in a seperat file|
+|`LOGDATE`| Date format| May be used to tag current container before pulling new one |
+|`LOGDIR`| Log directory| Output is logged into this directory |
+|`LOGFILE`| Log file name| Output is appended to this file in `LOGDIR`|
 |`AUTHOR`|Author name| Used as a comment for registry pushes|
 |`VERSION_LATEST`| Tag of the latest version|Used to tag the latest version of Container|
 |`VERSION_PREVIOUS`| Tag of the previous version||
+|`SILENT`| Toggle Logging| If set to true, nothing is logged into `LOGFILE`|
 
 ##build.sh
 Builds containers locally and  tags them as `REGISTRY_URL`.

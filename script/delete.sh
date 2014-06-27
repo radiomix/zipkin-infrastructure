@@ -23,20 +23,20 @@ fi
 #########
   
 ## pull the latest image off the repositoray and tag it
-echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image Logging to  >> $LOGFILE"
-echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image " >> $LOGFILE
+echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image Logging to  &>> $LOGFILE"
+echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image " &>> $LOGFILE
 
 # We push the container, to get a valid URL to delete this container
 DEL_CONTAINER=$(docker push $REGISTRY_URL$PREFIX$image)
 echo "** Container URL $DEL_CONTAINER for container  $REGISTRY_URL$IMG_PREFIX$image"
 
 #we untag and delete the container/image locally
-docker rmi $REGISTRY_URL$IMG_PREFIX$image &>/dev/null
-docker rmi $IMG_PREFIX$image &>/dev/null
+docker rmi $REGISTRY_URL$IMG_PREFIX$image &>> $LOGFILE
+docker rmi $IMG_PREFIX$image  &>> $LOGFILE
 
 # Logging
-echo "** Finished to delete container $IMG_PREFIX$image " >> $LOGFILE
-date >> $LOGFILE
+echo "** Finished to delete container $IMG_PREFIX$image " &>> $LOGFILE
+date	&>> $LOGFILE
 
 echo "** Finished to delete container $IMG_PREFIX$image " 
 exit

@@ -15,15 +15,15 @@ else
 fi
 
 
-echo "** Killing container $image and remove it" >> $LOGFILE
+echo "** Killing container $image and remove it" &>> $LOGFILE
 echo "** Killing container $image and remove it"
-docker kill ${NAME_PREFIX}$image  &>/dev/null
-docker rm ${NAME_PREFIX}$image  &>/dev/null
+docker kill ${NAME_PREFIX}$image  &>> $LOGFILE
+docker rm ${NAME_PREFIX}$image  &>> $LOGFILE
 
 
 #next two lines would kill/remove EVERY container   
-#docker ps -aq | xargs docker kill &>/dev/null
-#docker ps -aq | xargs docker rm  &>/dev/null
+#docker ps -aq | xargs docker kill &>> $LOGFILE
+#docker ps -aq | xargs docker rm  &>> $LOGFILE
 
 #show what is left:
 docker ps -a | grep $image

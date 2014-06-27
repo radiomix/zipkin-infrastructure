@@ -20,16 +20,14 @@ fi
 
 
 #########
-pushd "../$image" &>/dev/null
-CWD=$(pwd) >>/dev/null
-echo "** Starting to build container $IMG_PREFIX$image "
-echo "**  in directory $CWD  "
-echo "**  logging to $CWD/$LOGFILE"
-docker build --rm -t $IMG_PREFIX$image . #>> $LOGFILE  	#get build output into logfile
+pushd "../$image" &>> /dev/null 
+CWD=$(pwd) &>> /dev/null
+echo "** Starting to build container $IMG_PREFIX$image logging to $LOGFILE"
+docker build --rm -t $IMG_PREFIX$image . &>> $LOGFILE  	#get build output into logfile
 
 #logging
-docker images | grep $IMG_PREFIX$image  >> $LOGFILE
-echo "** Finished to build container $IMG_PREFIX$image " >> $LOGFILE
+docker images | grep $IMG_PREFIX$image  &>> $LOGFILE
+echo "** Finished to build container $IMG_PREFIX$image " &>> $LOGFILE
 date >> $LOGFILE
 
 echo "** Finished to build container $IMG_PREFIX$image " 

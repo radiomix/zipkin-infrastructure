@@ -22,15 +22,15 @@ fi
 pushd "../$image" &>/dev/null 
 CWD=$(pwd) &>/dev/null
 echo "Starting to push container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
-echo "  logging to $CWD/$LOGFILE"
+echo "  logging to $LOGFILE"
 ##TODO what if the repo is not available??
-#PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  >> $LOGFILE
-docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  #>> $LOGFILE
+#PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  &>> $LOGFILE
+docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST  &>> $LOGFILE
 ##TODO check for the image ID and export it as a tar file
 
-echo "Finished to push container $IMG_PREFIX$image " >> $LOGFILE 
-docker images | grep $REGISTRY_URL >> $LOGFILE
-date >> $LOGFILE
+echo "Finished to push container $IMG_PREFIX$image " &>> $LOGFILE
+docker images | grep $REGISTRY_URL &>> $LOGFILE
+date &>> $LOGFILE
 
 echo "Finished to push container $IMG_PREFIX$image " 
 docker images | grep $REGISTRY_URL

@@ -47,7 +47,7 @@ fi
 # Start container $image
 # We expect it to be down!
 # ----------------------------------------------------------- #
-echo "** Starting Container" $image >> $LOGFILE
+echo "** Starting Container" $image &>> $LOGFILE
 echo "** Starting Container" $image
 
 # only start selected container
@@ -55,24 +55,24 @@ case "$image" in
 # ----------------------------------------------------------- #
  fb-scribe)
         echo "** Starting fb-scribe"
-        PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) #&>/dev/null
+        PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
 	;;
 # ----------------------------------------------------------- #
  cassandra)
         echo "** Starting zipkin-cassandra"
-        PS_CASSANDRA=$(docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra") #&>/dev/null
+        PS_CASSANDRA=$(docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra") &>> $LOGFILE
         ;;
  collector) 
         echo "** Starting zipkin-collector"
-        PS_COLLECTOR=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:$COLLECTOR_PORT -p 9900:$COLLECTOR_MGT_PORT --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector") #&>/dev/null
+        PS_COLLECTOR=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:$COLLECTOR_PORT -p 9900:$COLLECTOR_MGT_PORT --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector") &>> $LOGFILE
 	;;
   query)
         echo "** Starting zipkin-query"
-        PS_QUERY=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --name="${NAME_PREFIX}query" "${IMG_PREFIX}query") #&>/dev/null
+        PS_QUERY=$(docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --name="${NAME_PREFIX}query" "${IMG_PREFIX}query") &>> $LOGFILE
 	;;
   web)
         echo "** Starting zipkin-web"
-        PS_WEB=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web") #&>/dev/null
+        PS_WEB=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web") &>> $LOGFILE
 	;;
 esac
 # ----------------------------------------------------------- #
@@ -80,14 +80,14 @@ esac
 UP=$(docker ps -a | grep Up | grep " ${NAME_PREFIX}$image")
 if  [ -n "$UP"  ]
 then
-    echo "** Container ${NAME_PREFIX}$image Up" >> $LOGGILE
+    echo "** Container ${NAME_PREFIX}$image Up" &>> $LOGFILE
     echo "** Container ${NAME_PREFIX}$image Up"
 else 
-   echo "** ERROR: Container  ${NAME_PREFIX}$image NOT RUNNING!! " >> $LOGFILE
+   echo "** ERROR: Container  ${NAME_PREFIX}$image NOT RUNNING!! " &>> $LOGFILE
    echo "** ERROR: Container  ${NAME_PREFIX}$image NOT RUNNING!! "
 fi
-docker ps  -a | grep $NAME_PRFIX$image >> $LOGFILE
+docker ps  -a | grep $NAME_PRFIX$image &>> $LOGFILE
 docker ps  -a | grep $NAME_PRFIX$image
 
-date >> $LOGFILE
+date &>> $LOGFILE
 echo "** Finished starting Container $image "
