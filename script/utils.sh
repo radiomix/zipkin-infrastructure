@@ -6,37 +6,58 @@
 source ./config.sh
 
 
+# We save input parameters for further usage
+#The image name
+image=$1
+#The docker key
+key=$2
+
 # ----------------------------------------------------------- #
 # Wrapper to test, if the string is a known zipkin service, 
 # return true if known, otherwise return false.
 # Expects a string as input parameter and global SERVICES as an array
 # ----------------------------------------------------------- #
 isZipkinService () {
-if isElementInArray "$1" "${SERVICES[@]}"; then return 0; else return 1; fi
+  local one=$image
+  local two=${SERVICES[@]}
+  if isElementInArray "$one" "$two"; then return 0; else return 1; fi
+}
+
+# ----------------------------------------------------------- #
+# Wrapper to test, if the string is a known docker inspect key, 
+# return true if known, otherwise return false.
+# Expects a string as input parameter and global DOCKER_INSPECT as an array
+# ----------------------------------------------------------- #
+isDockerKey() {
+  local one=$key
+  local two=${DOCKER_INSPECT[@]}
+  if isElementInArray "$one" "$two"; then return 0; else return 1; fi
 }
 
 # ----------------------------------------------------------- #
 # Checks if an element is whithin an array. 
 # Returns 0 if element is wihtin the array and 1 otherwise. 
 # Expects two parameter:
-#  1: string " some string"
-#  2: array as "${array[@]}" 
+#  $one: string " some string"
+#  $two: array as "${array[@]}" 
 # Usage:
 # $:> if isElementInArray " some string" "${array[@]}"; then do this else do that; fi
 # http://stackoverflow.com/questions/3685970/check-if-an-array-contains-a-value
 # ----------------------------------------------------------- #
 isElementInArray() {
-if [ -z $1 ]
+if [ -z $one ]
  then
  echo "ERROR: empty parameter"
  echo "usage: isElementInArray '"foo'" '"${bar[@]}'"
  return 1 
 fi
 
+##echo "in isElement $one; $two "
 local element
-for element in "${@:2}"; 
-do 
-  [[ "$element" == "$1" ]] && return 0; 
+for element in $two; 
+do
+  #echo "$element==$one" 
+  [[ "$element" == "$one" ]] && return 0; 
 done
 return 1
 }

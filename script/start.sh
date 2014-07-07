@@ -5,8 +5,6 @@ source ./utils.sh
 
 CONTAINER_VERSION=$VERSION_LATEST
 
-#is first parameter a valid zipkin service?
-image=$1
 if isZipkinService $image ; 
 then echo "** Preparing Zipkin service $image"; 
 else 

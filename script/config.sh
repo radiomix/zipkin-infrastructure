@@ -46,11 +46,17 @@ LOGDATE=$(date '+%F-%H-%M-%S')
 LOGDIR=../log/
 # Logfile name
 LOGFILE=$LOGDIR$NAME_PREFIX"docker.log"
+
+######################################
+# inspecting docker containers/images
+# We declare an array containg each docker json KEY to be searched by 
+# :> docker inspect -f"{{.KEY}}" CONTAINERID
+DOCKER_INSPECT=("Args" "Architecture" "Author" "Comment" "Config" "Container" "Created" "DockerVersion" "Driver" "Env" "ExecDriver" "HostConfig"  "HostnamePath"  "HostsPath" "Id"  "Image"   "MountLabel"  "Name"  "NetworkSettings"  "Os"  "Parent" "Path" "ProcessLabel" "ResolvConfPath" "Size" "State" "Volumes" "VolumesRW")
+
 ######################################
 # SILENT=true   dont output anything
 # To run without logging into $LOGFILE uncomment next line  
 #SILENT=true
-
 
 
 ######################################
@@ -65,8 +71,9 @@ then
 fi
 
 
+echo "Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" 
 # First two lines in logfile:
 echo "#####################################"   &>> $LOGFILE
 date &>> $LOGFILE
-	echo "Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" &>> $LOGFILE
+echo "Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" &>> $LOGFILE
 

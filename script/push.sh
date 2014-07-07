@@ -6,8 +6,6 @@
 
 source ./utils.sh
 
-#is first parameter a valid zipkin service?
-image=$1
 if isZipkinService $image ;
 then echo "** Preparing Zipkin service $image";
 else
