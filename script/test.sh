@@ -4,8 +4,9 @@
 
 source ./utils.sh
 
-echo " TESTING ${SERVICES[@]} "
-echo "--------------------- STARTING TEST ----------"  &>> $LOGFILE
+echo "** TESTING ${SERVICES[@]} "
+echo "** Logging into \"$LOGFILE\"" 
+echo "** --------------------- STARTING TEST ----------"  &>> $LOGFILE
 date &>> $LOGFILE
 
 
@@ -21,7 +22,7 @@ do
 done
 
 date &>> $LOGFILE
-echo "--------------------- FINISHED TEST ----------"  &>> $LOGFILE
-echo "DONE TESTING "
-echo "Please inspect logfile \"$LOGFILE\"" 
+echo "** --------------------- FINISHED TEST ----------"  &>> $LOGFILE
+echo "** TESTING DONE "
+echo "** Please inspect logfile \"$LOGFILE\"" 
 

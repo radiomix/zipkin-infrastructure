@@ -18,7 +18,7 @@ if isDockerKey $key;
 then /bin/true
 else 
    echo "** Second Argument must be a valid docker key like:"
-   echo "${DOCKER_INSPECT[@]}"
+   echo "** ${DOCKER_INSPECT[@]}"
    exit 100
 fi
 echo "**  Inspecting container $NAME_PREFIX$image " &>> $LOGFILE

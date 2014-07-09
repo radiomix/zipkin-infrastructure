@@ -15,14 +15,13 @@ fi
 
 # first we inspect which containers are running
 # ----------------------------------------------------------- #
-echo " Checking if container ${NAME_PREFIX}$image is present/running "
+echo "** Checking if container ${NAME_PREFIX}$image is present/running "
 RUNNING=$(docker ps -a  |  grep "${NAME_PREFIX}$image" )
 if [ $? == "0" ]
  then
    echo "** Container " ${RUNNING[@]}
    echo  "** Please stop and remove container ${NAME_PREFIX}$image by issuing commands "
-   echo  "** docker kill ${NAME_PREFIX}$image"
-   echo  "** docker rm ${NAME_PREFIX}$image"
+   echo  "**:> ./cleanup.sh $image"
    echo  "**  EXIT 100"
    exit 100
 fi
@@ -33,7 +32,7 @@ docker ps  -a | grep Exited | grep "${NAME_PREFIX}$image"
  if [ $? == "0" ]
  then
    echo "** Please remove container ${NAME_PREFIX}$image by issuing command"
-   echo "** docker rm ${NAME_PREFIX}$image"
+   echo "**:> ./cleanup.sh $image"
    echo "**  EXIT"
    exit 100
 fi
