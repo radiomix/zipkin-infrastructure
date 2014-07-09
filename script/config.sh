@@ -64,16 +64,16 @@ DOCKER_INSPECT=("Args" "Architecture" "Author" "Comment" "Config" "Container" "C
 ######################################
 if [ $SILENT ] 
 then 
-    echo "CAUTION: ACTIONS ARE NOT LOGGED into $LOGFILE"
-    echo "TO LOG INTO  $LOGFILE COMMENT OUT VARIABLE $SILENT IN \"config.sh\" "
+    echo "** CAUTION: ACTIONS ARE NOT LOGGED into $LOGFILE"
+    echo "** TO LOG INTO  $LOGFILE COMMENT OUT VARIABLE $SILENT IN \"config.sh\" "
     sleep 3
     LOGFILE="/dev/null"
 fi
 
 
-echo "Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" 
+echo "** Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" 
 # First two lines in logfile:
 echo "#####################################"   &>> $LOGFILE
 date &>> $LOGFILE
-echo "Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" &>> $LOGFILE
+echo "** Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" &>> $LOGFILE
 
