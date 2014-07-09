@@ -21,6 +21,14 @@ fi
 #Retagging 'latest' to 'minus_one' is ONLY done by the registry!!"
 #We might retag 'latest' to $LOGDATE in order to retrieve it later "
 #docker tag $IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$LOGDATE
+echo "** Preparing to pull from $REGISTRY_URL"
+REGISTRY_PING=$(curl http://$REGISTRY_URL/_ping) &>> $LOGFILE
+if [ ! "$REGISTRY_PING" == "true" ]
+then
+  echo "** ERROR: $REGISTRY_URL:$REGISTRY_PING not reachable "  &>> $LOGFILE
+  echo "** ERROR: $REGISTRY_URL:$REGISTRY_PING not reachable " 
+  exit 100
+fi
   
 ## pull the latest image off the repositoray and tag it
 echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image Logging to  &>> $LOGFILE"
