@@ -52,12 +52,12 @@ We try to place as many installation commands into Docker files, to ease the bui
 
 #### Directory structure
 
- * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) docker container with scala and zipkin installed
- * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) docker container with cassandra installed
- * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) docker container with zipkin collector installed
- * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) docker container with zipkin query installed
- * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) docker container with zipkin web
- * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
+ * [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) docker container with scala and zipkin installed
+ * [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) docker container with cassandra installed
+ * [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) docker container with zipkin collector installed
+ * [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) docker container with zipkin query installed
+ * [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) docker container with zipkin web
+ * [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
 
 
 #### Source
