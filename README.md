@@ -2,7 +2,7 @@ zipkin-infrastructure
 =====================
 
 All components needed to run Zipkin in Docker containers (Cassandra, Collector, Query, Web, and FB-Scribe)
-We build a Zipkin base container installing scala and zipkin collector, query and web respectively.
+We build a Zipkin base container installing scala and zipkin.
 From this docker image, we derive the specifig zipkin parts to combine a zipkin infrastructure.
 Directorey fb-scribe will generate a facebook [scribe](https://github.com/facebookarchive/scribe) service 
 ready to communicat with zipkin collector. The same functionallity can be obtained by using a [Scala Akka Tracing](https://github.com/levkhomich/akka-tracing) mechanism.
@@ -10,13 +10,26 @@ ready to communicat with zipkin collector. The same functionallity can be obtain
 
 ### Directory structure
 
- * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) generates a docker container for
- * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) generates a docker container for
- * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) generates a docker container for
- * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) generates a docker container for
- * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) generates a docker container for
- * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) generates a docker container for
+ * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) generates a docker container with scala and zipkin installed
+ * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) generates a docker container with cassandra installed
+ * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) generates a docker container zipkin collector installed
+ * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) generates a docker container with zipkin query installed
+ * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) generates a docker container with zipkin web
+ * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
 
+
+### Zipkin Port Structure
+As we store the tracing data in a cassandra DB, we first of all start this container naming it `zipkin-cassandra` as defined by `NAME_PRFIX` in [config.sh](https://github.com/elemica/zipkin-infrastructure/blob/master/script/config.sh) and link  `zipkin-collector`, `zipkin-query` and `zipkin-web` to it.
+All ports we use are defined in  [config.sh](https://github.com/elemica/zipkin-infrastructure/blob/master/script/config.sh).
+ * `COLLECTOR_PORT="9410"` exposed by container `zipkin-collector` and linked internally to talk to `zipkin-cassandra` 
+ * `COLLECTOR_MGT_PORT="9900"` exposed by container `zipkin-collector` and linked internally to talk to `zipkin-cassandra`
+ * `QUERY_PORT="9411` exposed by container `zipkin-query` and linked internally to talk to `zipkin-cassandra`
+ * `WEB_PORT="8080"` exposed by container `zipkin-web` to be accessed by a browser to surf the zipkin web UI.
+
+######TODO 
+ * Check for container link between web and query?
+ * On wich port does fb-scribe (or akka) trace to collector?
+ * Configure linking between fb-scribe (or akka) and collector running on different docker hosts.
 
 #### Notes
 
@@ -45,7 +58,7 @@ We try to place as many installation commands into Docker files, to ease the bui
 
 ### Source
 This repo is cloned form [https://github.com/lispmeister/docker-zipkin.git](https://github.com/lispmeister/docker-zipkin.git) 
-
+Zipkin base installation is describe in the [twitter zipkin repo](https://github.com/twitter/zipkin/blob/master/doc/install.md) and further configuration in detail in [Zipkin, from Twitter](http://twitter.github.io/zipkin/install.html).
 ### Authors
 
 Zero Cho <itszero@gmail.com>
@@ -53,3 +66,7 @@ Zero Cho <itszero@gmail.com>
 Markus Fix <lispmeister@gmail.com>
 
 Michael Klöckner <mkl@im7.de>
+
+## changelog 
+* 2014-07-11 Added Zipkin documentation and port usage
+
