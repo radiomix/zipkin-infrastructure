@@ -65,11 +65,8 @@ This repo is cloned from [https://github.com/lispmeister/docker-zipkin.git](http
 Zipkin base installation is describe in the [twitter zipkin repo](https://github.com/twitter/zipkin/blob/master/doc/install.md) and further configuration in detail in [Zipkin, from Twitter](http://twitter.github.io/zipkin/install.html).
 #### Authors
 
-Zero Cho <itszero@gmail.com>
-
-Markus Fix <lispmeister@gmail.com>
-
 Michael Klöckner <mkl@im7.de>
+Markus Fix <lispmeister@gmail.com>
 
 #### changelog 
 * 2014-07-11 Added Zipkin documentation and port usage
