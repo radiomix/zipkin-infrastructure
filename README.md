@@ -7,7 +7,7 @@ From this docker image, we derive the specifig zipkin parts to combine a zipkin 
 Directorey fb-scribe will generate a facebook [scribe](https://github.com/facebookarchive/scribe) service 
 ready to communicat with zipkin collector. The same functionallity can be obtained by using a [Scala Akka Tracing](https://github.com/levkhomich/akka-tracing) mechanism.
 
-![Zipkin infrascructure overview](https://github.com/elemica/zipkin-infrastructure/blob/master/zipkin-architecture-overview.jpg) 
+![Zipkin infrascructure overview](zipkin-architecture-overview.jpg) 
 
 
 ### Directory structure
