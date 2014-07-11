@@ -23,8 +23,7 @@ All ports we use are defined in  [config.sh](https://github.com/elemica/zipkin-i
 
 ######TODO 
  * Check for container link between web and query?
- * On wich port does fb-scribe (or akka) trace to collector?
- * Configure linking between fb-scribe (or akka) and collector running on different docker hosts.
+ * Configure linking between fb-scribe (or akka) and collector (`COLLECTOR_PORT`) running on different docker hosts.
 
 #### Notes
 
@@ -48,16 +47,16 @@ port 9410 via akka-tracing or other libraries that support Zipkin tracing.
 We try to place as many installation commands into Docker files, to ease the build process:
  * Each build step is frozen as an intermediate container
  * Errors during build don`t require rerunning it completely
- * Testing new install instaructions start from a partly build process and thus run faster
+ * Testing new install instructions start from a partly build process and thus run faster
 
 
 #### Directory structure
 
- * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) generates a docker container with scala and zipkin installed
- * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) generates a docker container with cassandra installed
- * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) generates a docker container zipkin collector installed
- * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) generates a docker container with zipkin query installed
- * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) generates a docker container with zipkin web
+ * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) docker container with scala and zipkin installed
+ * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) docker container with cassandra installed
+ * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) docker container zipkin collector installed
+ * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) docker container with zipkin query installed
+ * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) docker container with zipkin web
  * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
 
 
