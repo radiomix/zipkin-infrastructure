@@ -3,21 +3,11 @@ zipkin-infrastructure
 
 All components needed to run Zipkin in Docker containers (Cassandra, Collector, Query, Web, and FB-Scribe)
 We build a Zipkin base container installing scala and zipkin.
-From this docker image, we derive the specifig zipkin parts to combine a zipkin infrastructure.
+From this docker image, we derive the specific zipkin parts to combine a zipkin infrastructure.
 Directorey fb-scribe will generate a facebook [scribe](https://github.com/facebookarchive/scribe) service 
 ready to communicat with zipkin collector. The same functionallity can be obtained by using a [Scala Akka Tracing](https://github.com/levkhomich/akka-tracing) mechanism.
 
 ![Zipkin infrascructure overview](zipkin-architecture-overview.jpg) 
-
-
-### Directory structure
-
- * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) generates a docker container with scala and zipkin installed
- * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) generates a docker container with cassandra installed
- * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) generates a docker container zipkin collector installed
- * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) generates a docker container with zipkin query installed
- * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) generates a docker container with zipkin web
- * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
 
 
 ### Zipkin Port Structure
@@ -54,17 +44,27 @@ Once the containers are running you can connect to the collector on
 port 9410 via akka-tracing or other libraries that support Zipkin tracing.
 <https://github.com/levkhomich/akka-tracing>
 
-### Dockerfile
+#### Dockerfile
 We try to place as many installation commands into Docker files, to ease the build process:
  * Each build step is frozen as an intermediate container
  * Errors during build don`t require rerunning it completely
  * Testing new install instaructions start from a partly build process and thus run faster
 
 
-### Source
-This repo is cloned form [https://github.com/lispmeister/docker-zipkin.git](https://github.com/lispmeister/docker-zipkin.git) 
+#### Directory structure
+
+ * Directory [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) generates a docker container with scala and zipkin installed
+ * Directory [cassandra](https://github.com/elemica/zipkin-infrastructure/tree/master/cassandra) generates a docker container with cassandra installed
+ * Directory [collector](https://github.com/elemica/zipkin-infrastructure/tree/master/collector) generates a docker container zipkin collector installed
+ * Directory [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) generates a docker container with zipkin query installed
+ * Directory [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) generates a docker container with zipkin web
+ * Directory [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
+
+
+#### Source
+This repo is cloned from [https://github.com/lispmeister/docker-zipkin.git](https://github.com/lispmeister/docker-zipkin.git) 
 Zipkin base installation is describe in the [twitter zipkin repo](https://github.com/twitter/zipkin/blob/master/doc/install.md) and further configuration in detail in [Zipkin, from Twitter](http://twitter.github.io/zipkin/install.html).
-### Authors
+#### Authors
 
 Zero Cho <itszero@gmail.com>
 
@@ -72,6 +72,6 @@ Markus Fix <lispmeister@gmail.com>
 
 Michael Klöckner <mkl@im7.de>
 
-## changelog 
+#### changelog 
 * 2014-07-11 Added Zipkin documentation and port usage
 
