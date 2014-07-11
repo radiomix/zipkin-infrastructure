@@ -24,8 +24,8 @@ All ports we use are defined in  [config.sh](https://github.com/elemica/zipkin-i
 
 | Variable| Port| Exposed by | Description |
 |:---------|:---------|:-------|:-------| 
-| `COLLECTOR_PORT` | 9410| `zipkin-collector` | linked internally to talk to `zipkin-cassandra`| 
-| `COLLECTOR_MGT_PORT`| 9900 | `zipkin-collector` | linked internally to talk to `zipkin-cassandra`|
+| `COLLECTOR_PORT`| 9410| `zipkin-collector`| linked internally to talk to `zipkin-cassandra`| 
+| `COLLECTOR_MGT_PORT`| 9900 | `zipkin-collector`| linked internally to talk to `zipkin-cassandra`|
 | `QUERY_PORT` | 9411|  `zipkin-query`| linked internally to talk to `zipkin-cassandra`|
 | `WEB_PORT`| 8080| `zipkin-web`| to be accessed by a browser to surf the zipkin web UI|
 
