@@ -21,10 +21,12 @@ ready to communicat with zipkin collector. The same functionallity can be obtain
 ### Zipkin Port Structure
 As we store the tracing data in a cassandra DB, we first of all start this container naming it `zipkin-cassandra` as defined by `NAME_PRFIX` in [config.sh](https://github.com/elemica/zipkin-infrastructure/blob/master/script/config.sh) and link  `zipkin-collector`, `zipkin-query` and `zipkin-web` to it.
 All ports we use are defined in  [config.sh](https://github.com/elemica/zipkin-infrastructure/blob/master/script/config.sh).
- * `COLLECTOR_PORT="9410"` exposed by container `zipkin-collector` and linked internally to talk to `zipkin-cassandra` 
- * `COLLECTOR_MGT_PORT="9900"` exposed by container `zipkin-collector` and linked internally to talk to `zipkin-cassandra`
- * `QUERY_PORT="9411` exposed by container `zipkin-query` and linked internally to talk to `zipkin-cassandra`
- * `WEB_PORT="8080"` exposed by container `zipkin-web` to be accessed by a browser to surf the zipkin web UI.
+|Variable| Port| Exposed by | Description |
+|---------|:---------:|:-------:|:-------:| 
+  |`COLLECTOR_PORT` | 9410| `zipkin-collector` | linked internally to talk to `zipkin-cassandra` | 
+ |`COLLECTOR_MGT_PORT`|9900 | `zipkin-collector` | linked internally to talk to `zipkin-cassandra`|
+ |`QUERY_PORT` |9411|  `zipkin-query`| linked internally to talk to `zipkin-cassandra`|
+ |`WEB_PORT`|8080|`zipkin-web`| to be accessed by a browser to surf the zipkin web UI|
 
 ######TODO 
  * Check for container link between web and query?
