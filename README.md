@@ -66,6 +66,7 @@ Zipkin base installation is describe in the [twitter zipkin repo](https://github
 #### Authors
 
 Michael Klöckner <mkl@im7.de>
+
 Markus Fix <lispmeister@gmail.com>
 
 #### changelog 
