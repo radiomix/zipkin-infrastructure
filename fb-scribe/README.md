@@ -3,6 +3,9 @@
 This is the image for a single Facebook Scribe node 
 to be used by the Zipkin collector image.
 
+## Ports
+Zipkin configures a scribe client in [scribe-client.conf](https://github.com/twitter/zipkin/blob/1.1.0/zipkin-redis/config/scribe-client.conf).
+
 ## Notes
 Building the scribe container takes between 10 and 15 minutes on a 2GHz CPU depending on the memory available.
 The resulting image is about 800MB.
@@ -12,3 +15,4 @@ The resulting image is about 800MB.
 
 ## changelog
 * 2014-05-19 
+* 2014-07-11 Added Zipkin documentation link
