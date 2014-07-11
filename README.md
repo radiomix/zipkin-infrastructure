@@ -49,7 +49,6 @@ We try to place as many installation commands into Docker files, to ease the bui
  * Errors during build don`t require rerunning it completely
  * Testing new install instructions start from a partly build process and thus run faster
 
-
 #### Directory structure
 
  * [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base) docker container with scala and zipkin installed
@@ -58,7 +57,6 @@ We try to place as many installation commands into Docker files, to ease the bui
  * [query](https://github.com/elemica/zipkin-infrastructure/tree/master/query) docker container with zipkin query installed
  * [web](https://github.com/elemica/zipkin-infrastructure/tree/master/web) docker container with zipkin web
  * [script](https://github.com/elemica/zipkin-infrastructure/tree/master/script) contains utilites to manage (build, push, pull, start, deploy ) the zipkin container.
-
 
 #### Source
 This repo is cloned from [https://github.com/lispmeister/docker-zipkin.git](https://github.com/lispmeister/docker-zipkin.git) 
