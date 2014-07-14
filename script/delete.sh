@@ -19,8 +19,6 @@ else
 fi
 
 #########
-  
-## pull the latest image off the repositoray and tag it
 echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image Logging to  &>> $LOGFILE"
 echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image " &>> $LOGFILE
 

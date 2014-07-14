@@ -40,8 +40,7 @@ All images with the exception of zipkin-cassandra are sharing a base image:
 [base](https://github.com/elemica/zipkin-infrastructure/tree/master/base). zipkin-base and zipkin-cassandra are built on ubuntu:12.04.
 
 Once the containers are running you can connect to the collector on
-port 9410 via akka-tracing or other libraries that support Zipkin tracing.
-<https://github.com/levkhomich/akka-tracing>
+port 9410 via akka-tracing or other libraries that support Zipkin tracing. <https://github.com/levkhomich/akka-tracing>
 
 #### Dockerfile
 We try to place as many installation commands into Docker files, to ease the build process:

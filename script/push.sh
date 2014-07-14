@@ -15,7 +15,6 @@ fi
 
 
 #########
-# For each container: change into the directory and build it; come back
 echo "** Preparing to push container to registry $REGISTRY_URL"
 REGISTRY_PING=$(curl http://$REGISTRY_URL/_ping) &>> $LOGFILE
 if [ ! "$REGISTRY_PING" == "true" ] 
@@ -31,7 +30,7 @@ CWD=$(pwd) &>/dev/null
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST" &>> $LOGFILE
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
 PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  &>> $LOGFILE
-##TODO check for the image ID and export it as a tar file
+
 echo "** $PUSH "
 echo "** Finished to push container $IMG_PREFIX$image " &>> $LOGFILE
 echo "** Finished to push container $IMG_PREFIX$image "
