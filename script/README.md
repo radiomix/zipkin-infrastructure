@@ -57,7 +57,7 @@ Usage:
 Builds a container and  tags it locally as `IMG_PREFIX`foo, where foo is a valid zipkin service.
 #### [`push.sh`](push.sh)
 Pushs a container taged as *latest* to `REGISTRY_URL`. If the registry is not reachable, the script echos an error.
-#### [`pull.sh`](push.sh)
+#### [`pull.sh`](pull.sh)
 Pulls the container from `REGISTRY_URL` and tags it locally as *latest*.
 #### [`stop.sh`](stop.sh)
 Stops a container. It would be nice to be able to

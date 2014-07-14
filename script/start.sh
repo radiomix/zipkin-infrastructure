@@ -39,7 +39,8 @@ fi
 
 
 
-##TODO maybe we should split starting each container into a seperate file!!
+##TODO Deploy conainer only completely as zipkin infrastructure as in [docker-zipkin](https://github.com/lispmeister/docker-zipkin/blob/master/deploy/deploy.sh)
+
 # ----------------------------------------------------------- #
 # Start container $image
 # We expect it to be down!
