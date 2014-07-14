@@ -70,3 +70,4 @@ Markus Fix <lispmeister@gmail.com>
 #### changelog 
 * 2014-07-11 Added Zipkin documentation and port usage
 * 2014-07-12 Added Port structure
+* 2014-07-14 Minor docu changes
