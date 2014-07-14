@@ -4,13 +4,12 @@ This directory contains bash shell scripts to manipulate docker containers.
 Each operation is logged locally into a logfile. We use different scripts, 
 to perform the tasks. 
 
-## Prerequests
+### Prerequisite
 We expect, that the caller of these scripts is in the sudo group and we can call the `docker` 
 command right from the command line. 
 
-##Variables
 All configuration variables are combined in one file `config.sh` and read by `utils.sh`.
-###config.sh
+#### [`config.sh`](config.sh)
 This file contains variables to configure the bash scripts
 
 | Variable | Description | Note |
@@ -27,10 +26,10 @@ This file contains variables to configure the bash scripts
 |`VERSION_LATEST`| Tag of the latest version|Used to tag the latest version of Container|
 |`VERSION_PREVIOUS`| Tag of the previous version||
 |`SILENT`| Toggle Logging| If set to true, nothing is logged into `LOGFILE`|
-###utils.sh 
+#### [`utils.sh`](utils.sh) 
 This file contains functions for container manipulations.
 
-## Shell scripts
+### Shell scripts
 ####  Usage
 Change into this directory and call the appropriate bash script with a container name
 as defined in  `SERVICES` to run the task.
@@ -54,24 +53,24 @@ Usage:
 ** EXIT 
 
 ```
-### build.sh
+#### [`build.sh`](build.sh)
 Builds a container and  tags it locally as `IMG_PREFIX`foo, where foo is a valid zipkin service.
-### push.sh
+#### [`push.sh`](push.sh)
 Pushs a container taged as *latest* to `REGISTRY_URL`. If the registry is not reachable, the script echos an error.
-### pull.sh
+#### [`pull.sh`](push.sh)
 Pulls the container from `REGISTRY_URL` and tags it locally as *latest*.
-###stop.sh
+#### [`stop.sh`](stop.sh)
 Stops a container. It would be nice to be able to
 rename containers easyly, but [ container renaming #3036 ](https://github.com/dotcloud/docker/issues/3036) 
 does not describe a solution.
-###start.sh
+#### [`start.sh`](start.sh)
 Checks, if a container of this name is runnung and if not, start this container.
-####cleanup.sh
+#### [`cleanup.sh`](cleanup.sh)
 Kills and removes a container.
-####delete.sh
+#### [`delete.sh`](delete.sh)
 Tries to delete a container from `REGISTRY_URL` and locally.
 
-#### Workaround to delete a container from the repository
+##### Workaround to delete a container from the repository
 After pushing a container to the repo, docker answers with the correct URL to review the tags for that image. 
   We need to remember this URL to later delete the container from the registry.
 
@@ -86,7 +85,7 @@ Image 120e218dd395 already pushed, skipping
 Image a9eb17255234 already pushed, skipping
 Image 25a64a992f61 already pushed, skipping
 Image 3b420170fc46 already pushed, skipping
-Image 82a51d5683a2 already pushed, skipping
+Image  82a51d5683a2 already pushed, skipping
 Pushing tag for rev [82a51d5683a2] on {http://registry.example.com:5000/v1/repositories/hello/world/tags/latest} 
 ```
 In order to delete container `registry.example.com:5000/hello/world` from the registry, we have to delete both local container `hello/world` and `registry.example.com:5000/hello/world`, to inshure, docker does not remember locally, what image was pushed to the registry. 
@@ -94,8 +93,8 @@ We can then use the last URL to delete the container like this:
 
 `curl -X DELETE http://registry.example.com:5000/v1/repositories/hello/world/`
 
-###Test
-####test.sh
+### Test
+#### [`test.sh`](test.sh)
 Runs all scripts with all containers. 
-#####TODO
+##### TODO
 * Evaluate the test results.
