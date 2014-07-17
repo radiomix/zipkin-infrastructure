@@ -15,12 +15,12 @@ date &>> $LOGFILE
 ##TODO check output of scripts
 for s in ${SERVICES[@]} ;
 do 
- ./build.sh $s
- ./push.sh $s
- ./pull.sh $s 
- ./start.sh $s 
- ./stop.sh $s 
- ./cleanup.sh $s
+ ${DIRNAME}/build.sh $s
+ ${DIRNAME}/push.sh $s
+ ${DIRNAME}/pull.sh $s 
+ ${DIRNAME}/start.sh $s 
+ ${DIRNAME}/stop.sh $s 
+ ${DIRNAME}/cleanup.sh $s
 done
 
 date &>> $LOGFILE
