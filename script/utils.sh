@@ -3,7 +3,11 @@
 #
 # Configuration
 #
-source ./config.sh
+# check, how we are called to source our config file
+DIRNAME=$(dirname $0)
+## this file contains configuration and functions
+source ${DIRNAME}/config.sh
+
 
 
 # We save input parameters for further usage
