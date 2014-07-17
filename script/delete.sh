@@ -7,7 +7,10 @@
 # defined in file config.sh in the array ${SERVICES[@]}
 #
 
-source ./utils.sh
+# check, how we are called to source our utilities
+DIRNAME=$(dirname $0)
+## this file contains configuration and functions
+source ${DIRNAME}/utils.sh
 
 CONTAINER_VERSION=$VERSION_LATEST
 

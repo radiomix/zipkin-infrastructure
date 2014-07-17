@@ -2,8 +2,11 @@
 #
 # kill running container and remove it
 #
-source ./utils.sh
 
+# check, how we are called to source our utilities
+DIRNAME=$(dirname $0)
+## this file contains configuration and functions
+source ${DIRNAME}/utils.sh
 
 if isZipkinService $image ;
 then echo "** Preparing Zipkin service $image";

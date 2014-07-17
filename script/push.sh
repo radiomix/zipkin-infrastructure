@@ -4,7 +4,10 @@
 # Build all neccessary Docker container to run a zipkin tracing/logging app:
 #
 
-source ./utils.sh
+# check, how we are called to source our utilities
+DIRNAME=$(dirname $0)
+## this file contains configuration and functions
+source ${DIRNAME}/utils.sh
 
 if isZipkinService $image ;
 then echo "** Preparing Zipkin service $image";

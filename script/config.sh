@@ -42,8 +42,15 @@ VERSION_PREVIOUS="minus_one"
 # LOGGING
 #Log date, may be used to tag current container before pulling new one
 LOGDATE=$(date '+%F-%H-%M-%S')
-#Log directory
-LOGDIR=../log/
+#
+#Log directory: if we were called from within dir script, one dir up!
+#
+if [ ${DIRNAME} == "." ] 
+then
+  LOGDIR=../log/
+else
+  LOGDIR=log/
+fi
 # Logfile name
 LOGFILE=$LOGDIR$NAME_PREFIX"docker.log"
 
