@@ -7,7 +7,6 @@ DIRNAME=$(dirname $0)
 source ${DIRNAME}/utils.sh
 
 echo "** TESTING ${SERVICES[@]} "
-echo "** Logging into \"$LOGFILE\"" 
 echo "** --------------------- STARTING TEST ----------"  &>> $LOGFILE
 date &>> $LOGFILE
 

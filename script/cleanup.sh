@@ -18,8 +18,8 @@ fi
 
 echo "** Killing container $image and remove it" &>> $LOGFILE
 echo "** Killing container $image and remove it"
-docker kill ${NAME_PREFIX}$image  &>> $LOGFILE
-docker rm ${NAME_PREFIX}$image  &>> $LOGFILE
+docker kill ${NAME_PREFIX}$image &>> $LOGFILE 
+docker rm ${NAME_PREFIX}$image &>> $LOGFILE 
 
 
 #next two lines would kill/remove EVERY container   
@@ -27,5 +27,7 @@ docker rm ${NAME_PREFIX}$image  &>> $LOGFILE
 #docker ps -aq | xargs docker rm  &>> $LOGFILE
 
 #show what is left:
-docker ps -a | grep $image
+docker ps -a | grep $image &>> $LOGFILE
+docker ps -a | grep $image &>> $LOGFILE
+
 echo "** Finished killing  ${NAME_PREFIX}$image"

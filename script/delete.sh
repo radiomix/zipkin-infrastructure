@@ -21,7 +21,7 @@ else
 fi
 
 #########
-echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image Logging to  &>> $LOGFILE"
+echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image "
 echo "** Starting to delete container $REGISTRY_URL$IMG_PREFIX$image " &>> $LOGFILE
 
 # We push the container, to get a valid URL to delete this container

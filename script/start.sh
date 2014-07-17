@@ -22,7 +22,8 @@ echo "** Checking if container ${NAME_PREFIX}$image is present/running "
 RUNNING=$(docker ps -a  |  grep "${NAME_PREFIX}$image" )
 if [ $? == "0" ]
  then
-   echo "** Container " ${RUNNING[@]}
+   echo "** Existing container " ${RUNNING[@]} &>> $LOGFILE
+   echo "** Existing container " ${RUNNING[@]}
    echo  "** Please stop and remove container ${NAME_PREFIX}$image by issuing commands "
    echo  "**:> ${DIRNAME}/cleanup.sh $image"
    echo  "**  EXIT 100"

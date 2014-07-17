@@ -34,7 +34,7 @@ then
 fi
   
 ## pull the latest image off the repositoray and tag it
-echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image Logging to  $LOGFILE"
+echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image "
 echo "** Starting to pull container $REGISTRY_URL$IMG_PREFIX$image " &>> $LOGFILE
 docker pull $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST &>> $LOGFILE
 docker tag $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST $IMG_PREFIX$image:$VERSION_LATEST &>> $LOGFILE
