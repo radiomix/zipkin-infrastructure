@@ -72,3 +72,4 @@ Markus Fix <lispmeister@gmail.com>
 * 2014-07-11 Added Zipkin documentation and port usage
 * 2014-07-12 Added Port structure
 * 2014-07-14 Minor docu changes
+* 2014-07-15 Added script to build/deploy zipkin containers as a hole
