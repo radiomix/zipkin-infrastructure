@@ -20,7 +20,9 @@ As cassandra uses many ports a possible AWS security group is described by [DATA
 
 Building the scribe container takes between 10 and 15 minutes on a 2GHz CPU depending on the memory available. 
 The resulting image is about 800MB. We had to start an AMI of type `t2` to not run out of memory.
-
+#### Usage
+Two scripts build and deploy zipkin containers. To build them freshly just call [`./build.sh `](build.sh)` -f` and to pull them from registry call `./build.sh -r`.
+To deploy and run zipkin container on one host call [`./deploy.sh`](deploy.sh)` -r` and to cleanup old containers call `./deploy.sh -c`.
 ######TODO 
  * Check for container link between web and query?
  * Configure linking between fb-scribe (or akka) and collector (`COLLECTOR_PORT`) running on different docker hosts.
