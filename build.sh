@@ -16,8 +16,6 @@ source ${DIRNAME}/utils.sh
    for image in ${ZIPKIN_SERVICES[@]}; do
      ${DIRNAME}/build.sh $image
    done
-   docker images -a | grep $NAME_PREFIX &>> $LOGFILE
-   docker images -a | grep $NAME_PREFIX 
  ;;
  # ----------------------------------------------------------- #
    --registry| -r )
@@ -41,5 +39,4 @@ source ${DIRNAME}/utils.sh
  esac
 
  # ----------------------------------------------------------- #
- date &>> $LOGFILE
 echo "** Finished $0 "
