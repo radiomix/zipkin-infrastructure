@@ -1,12 +1,12 @@
 # Scripts to manipulate containers
 
-This directory contains bash shell scripts to manipulate docker containers.
-Each operation is logged locally into a logfile. We use different scripts, 
-to perform the tasks. 
+This directory contains bash shell scripts to manipulate docker containers used by zipkin infrastructure.
+The scripts are meant as tools called by [deploy.sh](../deploy.sh).
+We use different scripts, to perform the tasks. Each operation is logged locally into a logfile.
 
 ### Prerequisite
-We expect, that the caller of these scripts is in the sudo group and we can call the `docker` 
-command right from the command line. 
+We expect, that the caller of these scripts is in the sudo group and is allowed to execute the `docker` 
+command on the command line. 
 
 All configuration variables are combined in one file `config.sh` and read by `utils.sh`.
 #### [`config.sh`](config.sh)
@@ -31,8 +31,8 @@ This file contains functions for container manipulations.
 
 ### Shell scripts
 ####  Usage
-Change into this directory and call the appropriate bash script with a container name
-as defined in  `SERVICES` to run the task.
+Call the appropriate bash script with a container name
+as defined in  `SERVICES` to run the task. 
 
 #### Example
 `./build.sh foo`
