@@ -24,6 +24,5 @@ done
 
 date &>> $LOGFILE
 echo "** --------------------- FINISHED TEST ----------"  &>> $LOGFILE
-echo "** TESTING DONE "
 echo "** Please inspect logfile \"$LOGFILE\"" 
-
+echo "** TESTING DONE "

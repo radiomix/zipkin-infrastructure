@@ -40,6 +40,6 @@ echo "** Finished to push container $IMG_PREFIX$image "
 docker images | grep $REGISTRY_URL &>> $LOGFILE
 date &>> $LOGFILE
 
-echo "** Finished to push container $IMG_PREFIX$image " 
 docker images | grep $REGISTRY_URL
+echo "** Finished to push container $IMG_PREFIX$image " 
 

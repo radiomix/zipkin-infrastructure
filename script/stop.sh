@@ -18,3 +18,4 @@ echo "**  Stoping container $NAME_PREFIX$image "
 ##TODO check if container exists and then maybe commit it as an image???
 docker stop "${NAME_PREFIX}$image" &>> $LOGFILE	#redirect stdout&stderror 
 date &>> $LOGFILE
+echo "** Finished to stop container $NAME_PREFIX$image "

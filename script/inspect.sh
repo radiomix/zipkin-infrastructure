@@ -29,3 +29,5 @@ echo "**  Inspecting container $NAME_PREFIX$image "
 docker inspect -f="{{json .$key}}" "${NAME_PREFIX}$image" &>> $LOGFILE 
 docker inspect -f="{{json .$key}}" "${NAME_PREFIX}$image"  
 date &>> $LOGFILE
+
+echo "** Finished to inspect container $IMG_PREFIX$image "
