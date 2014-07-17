@@ -25,7 +25,7 @@ if [ $? == "0" ]
  then
    echo "** Container " ${RUNNING[@]}
    echo  "** Please stop and remove container ${NAME_PREFIX}$image by issuing commands "
-   echo  "**:> ./cleanup.sh $image"
+   echo  "**:> ${DIRNAME}/cleanup.sh $image"
    echo  "**  EXIT 100"
    exit 100
 fi
@@ -36,7 +36,7 @@ docker ps  -a | grep Exited | grep "${NAME_PREFIX}$image"
  if [ $? == "0" ]
  then
    echo "** Please remove container ${NAME_PREFIX}$image by issuing command"
-   echo "**:> ./cleanup.sh $image"
+   echo "**:> ${DIRNAME}/cleanup.sh $image"
    echo "**  EXIT"
    exit 100
 fi
