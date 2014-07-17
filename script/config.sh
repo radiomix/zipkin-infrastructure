@@ -78,7 +78,7 @@ then
 fi
 
 
-echo "** Calling script: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" 
+echo "** Executing: \"$0\" Parameter: \"$1\" \"$2\" \"$3\" User: \"$(whoami)\"" 
 # First two lines in logfile:
 echo "#####################################"   &>> $LOGFILE
 date &>> $LOGFILE
