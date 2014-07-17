@@ -4,7 +4,6 @@
 # Configuration
 #
 # check, how we are called to source our config file
-DIRNAME=$(dirname $0)
 ## this file contains configuration and functions
 source ${DIRNAME}/config.sh
 
@@ -95,7 +94,7 @@ getContainerIdByName(){
  if [ -z "$1" ]                           # Is parameter #1 zero length?
    then
      echo " ERROR: Missing container name. "
-     exit 100
+     return 100
  fi
 
  RESULT=/tmp/result.txt

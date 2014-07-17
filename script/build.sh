@@ -33,4 +33,3 @@ echo "** Finished to build container $IMG_PREFIX$image " &>> $LOGFILE
 date >> $LOGFILE
 
 echo "** Finished to build container $IMG_PREFIX$image " 
-exit

@@ -12,7 +12,6 @@ DIRNAME=$(dirname $0)
 ## this file contains configuration and functions
 source ${DIRNAME}/utils.sh
 
-CONTAINER_VERSION=$VERSION_LATEST
 
 if isZipkinService $image ; 
 then echo "** Preparing Zipkin service $image"; 
@@ -38,4 +37,3 @@ echo "** Finished to delete container $IMG_PREFIX$image " &>> $LOGFILE
 date	&>> $LOGFILE
 
 echo "** Finished to delete container $IMG_PREFIX$image " 
-exit

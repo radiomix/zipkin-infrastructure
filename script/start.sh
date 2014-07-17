@@ -7,7 +7,6 @@ DIRNAME=$(dirname $0)
 source ${DIRNAME}/utils.sh
 
 
-CONTAINER_VERSION=$VERSION_LATEST
 
 if isZipkinService $image ; 
 then echo "** Preparing Zipkin service $image"; 

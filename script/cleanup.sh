@@ -28,3 +28,4 @@ docker rm ${NAME_PREFIX}$image  &>> $LOGFILE
 
 #show what is left:
 docker ps -a | grep $image
+echo "** Finished killing  ${NAME_PREFIX}$image"

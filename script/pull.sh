@@ -48,4 +48,3 @@ echo "** Finished to pull container $IMG_PREFIX$image " &>> $LOGFILE
 date &>> $LOGFILE
 
 echo "** Finished to pull container $IMG_PREFIX$image "
-exit
