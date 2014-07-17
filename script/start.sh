@@ -90,6 +90,6 @@ else
 fi
 docker ps  -a | grep $NAME_PRFIX$image &>> $LOGFILE
 docker ps  -a | grep $NAME_PRFIX$image
-
 date &>> $LOGFILE
-echo "** Finished starting Container $image "
+
+echo "** Finished to start container $image "

@@ -33,7 +33,6 @@ docker rmi $REGISTRY_URL$IMG_PREFIX$image &>> $LOGFILE
 docker rmi $IMG_PREFIX$image  &>> $LOGFILE
 
 # Logging
-echo "** Finished to delete container $IMG_PREFIX$image " &>> $LOGFILE
 date	&>> $LOGFILE
 
 echo "** Finished to delete container $IMG_PREFIX$image " 
