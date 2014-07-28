@@ -9,6 +9,13 @@ IMG_PREFIX="elemica/zipkin-"
 #Container name prefix
 NAME_PREFIX="zipkin-"
 
+# Directory with zipkin docker files
+DOCKERDIR=""
+if [ ${DIRNAME} == "." ] 
+then
+  DOCKERDIR="../"
+fi
+
 # registry and port, we push to 
 # my-registry.example.com:5000/  !! TRAILING FORWARDSLASH !! 
 REGISTRY_URL=registry.elemica.com:5000/  
@@ -45,15 +52,14 @@ LOGDATE=$(date '+%F-%H-%M-%S')
 #
 #Log directory: if we were called from within dir script, one dir up!
 #
-if [ ${DIRNAME} == "." ] 
+if [ ${DIRNAME} == "script" ] 
 then
-  LOGDIR=../log/
+  LOGDIR=$(pwd)/log/
 else
-  LOGDIR=log/
+  LOGDIR=$(pwd)/script/../log/
 fi
 # Logfile name
 LOGFILE=$LOGDIR$NAME_PREFIX"docker.log"
-
 ######################################
 # inspecting docker containers/images
 # We declare an array containg each docker json KEY to be searched by 
@@ -75,12 +81,11 @@ then
     echo "** TO LOG INTO  $LOGFILE COMMENT OUT VARIABLE $SILENT IN \"config.sh\" "
     sleep 3
     LOGFILE="/dev/null"
-else
-    echo "** Logging into $LOGFILE"
 fi
 
 
 echo "** Executing: \"$0\" Parameter: \"$*\" User: \"$(whoami)\"" 
+echo "** Logging into $LOGFILE"
 # First two lines in logfile:
 echo "#####################################"   &>> $LOGFILE
 date &>> $LOGFILE

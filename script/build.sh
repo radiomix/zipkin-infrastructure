@@ -8,7 +8,7 @@
 #
 
 # check, how we are called to source our utilities
-DIRNAME=$(dirname $0)
+DIRNAME=${DIRNAME:="script"}
 ## this file contains configuration and functions
 source ${DIRNAME}/utils.sh 
 
@@ -19,12 +19,10 @@ else
     showUsage $0 $image
     exit 100
 fi
-
-
 #########
-pushd "../$image" &>> /dev/null 
+pushd "$DOCKERDIR$image" &>> /dev/null 
 CWD=$(pwd) &>> /dev/null
-echo "** Starting to build container $IMG_PREFIX$image logging to $LOGFILE"
+echo "** Starting to build container $IMG_PREFIX$image in direcotry $CWD "
 docker build --rm -t $IMG_PREFIX$image . &>> $LOGFILE  	#get build output into logfile
 
 #logging

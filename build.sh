@@ -3,11 +3,9 @@
 #
 # We build the zipkin infrastructure: cassandra, collector, query and web as docker container
 #
-
-# check, how we are called to source our utilities
-DIRNAME=script
+DIRNAME="script"
 ## this file contains configuration and functions
-source ${DIRNAME}/utils.sh
+source $DIRNAME/utils.sh
 
 
  case "$1" in

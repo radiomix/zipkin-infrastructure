@@ -5,7 +5,7 @@
 #
 
 # check, how we are called to source our utilities
-DIRNAME=$(dirname $0)
+DIRNAME=${DIRNAME:="script"}
 ## this file contains configuration and functions
 source ${DIRNAME}/utils.sh
 
@@ -27,8 +27,7 @@ then
   exit 100
 fi
 echo "**  Registry $REGISTRY_URL:$REGISTRY_PING " 
-echo "**  logging to $LOGFILE"
-pushd "../$image" &>/dev/null 
+pushd "$DOCKERDIR$image" &>> /dev/null 
 CWD=$(pwd) &>/dev/null
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST" &>> $LOGFILE
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"

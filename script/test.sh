@@ -2,7 +2,7 @@
 
 # testing arrayContainsElement 
 # check, how we are called to source our utilities
-DIRNAME=$(dirname $0)
+DIRNAME=${DIRNAME:="script"}
 ## this file contains configuration and functions
 source ${DIRNAME}/utils.sh
 

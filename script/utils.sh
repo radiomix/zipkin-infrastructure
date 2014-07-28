@@ -3,7 +3,9 @@
 #
 # Configuration
 #
-# check, how we are called to source our config file
+
+# Check if we were called from inside script dir
+DIRNAME=${DIRNAME:="."}
 ## this file contains configuration and functions
 source ${DIRNAME}/config.sh
 
