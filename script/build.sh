@@ -7,8 +7,13 @@
 # defined in file config.sh in the array ${SERVICES[@]}
 #
 
-# check, how we are called to source our utilities
+# check, how we are called 
 DIRNAME=${DIRNAME:="script"}
+if [ ! -f $DIRNAME/utils.sh ]
+then 
+ echo "** ERROR don't call this script within this directory "
+ exit 100
+fi
 ## this file contains configuration and functions
 source ${DIRNAME}/utils.sh 
 
@@ -20,9 +25,8 @@ else
     exit 100
 fi
 #########
-pushd "$DOCKERDIR$image" &>> /dev/null 
-CWD=$(pwd) &>> /dev/null
-echo "** Starting to build container $IMG_PREFIX$image in direcotry $CWD "
+pushd "$image" &>> /dev/null 
+echo "** Starting to build container $IMG_PREFIX$image in direcotry `pwd` "
 docker build --rm -t $IMG_PREFIX$image . &>> $LOGFILE  	#get build output into logfile
 
 #logging

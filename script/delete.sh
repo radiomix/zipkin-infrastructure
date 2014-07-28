@@ -7,10 +7,15 @@
 # defined in file config.sh in the array ${SERVICES[@]}
 #
 
-# check, how we are called to source our utilities
-DIRNAME=${DIRNAME:="script"}
-## this file contains configuration and functions
-source ${DIRNAME}/utils.sh
+# check, how we are called  
+DIRNAME=${DIRNAME:="script"} 
+if [ ! -f $DIRNAME/utils.sh ] 
+then 
+ echo "** ERROR don't call this script within this directory " 
+ exit 100 
+fi 
+## this file contains configuration and functions 
+source ${DIRNAME}/utils.sh 
 
 
 if isZipkinService $image ; 

@@ -11,7 +11,7 @@ source $DIRNAME/utils.sh
  case "$1" in
  # ----------------------------------------------------------- #
    --fresh | -f )
-   for image in ${ZIPKIN_SERVICES[@]}; do
+   for image in ${SERVICES[@]}; do
      ${DIRNAME}/build.sh $image
    done
  ;;

@@ -8,6 +8,7 @@
 DIRNAME=${DIRNAME:="."}
 ## this file contains configuration and functions
 source ${DIRNAME}/config.sh
+#echo "+$DIRNAME+" && exit 
 
 
 

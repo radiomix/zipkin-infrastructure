@@ -11,11 +11,11 @@ NAME_PREFIX="zipkin-"
 
 # Directory with zipkin docker files
 DOCKERDIR=""
-if [ ${DIRNAME} == "." ] 
+if [ ${DIRNAME} == "script" ] 
 then
   DOCKERDIR="../"
 fi
-
+#echo "#$DOCKERDIR#"
 # registry and port, we push to 
 # my-registry.example.com:5000/  !! TRAILING FORWARDSLASH !! 
 REGISTRY_URL=registry.elemica.com:5000/  
@@ -56,7 +56,8 @@ if [ ${DIRNAME} == "script" ]
 then
   LOGDIR=$(pwd)/log/
 else
-  LOGDIR=$(pwd)/script/../log/
+ echo "** ERROR LOGDIR:$LOGDIR: not defined"
+ exit 100
 fi
 # Logfile name
 LOGFILE=$LOGDIR$NAME_PREFIX"docker.log"

@@ -4,10 +4,15 @@
 # Build all neccessary Docker container to run a zipkin tracing/logging app:
 #
 
-# check, how we are called to source our utilities
-DIRNAME=${DIRNAME:="script"}
-## this file contains configuration and functions
-source ${DIRNAME}/utils.sh
+# check, how we are called  
+DIRNAME=${DIRNAME:="script"} 
+if [ ! -f $DIRNAME/utils.sh ] 
+then 
+ echo "** ERROR don't call this script within this directory " 
+ exit 100 
+fi 
+## this file contains configuration and functions 
+source ${DIRNAME}/utils.sh 
 
 if isZipkinService $image ;
 then echo "** Preparing Zipkin service $image";
@@ -26,9 +31,7 @@ then
   echo "** ERROR: $REGISTRY_URL:$REGISTRY_PING not reachable " 
   exit 100
 fi
-echo "**  Registry $REGISTRY_URL:$REGISTRY_PING " 
-pushd "$DOCKERDIR$image" &>> /dev/null 
-CWD=$(pwd) &>/dev/null
+echo "** Registry $REGISTRY_URL:$REGISTRY_PING " 
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST" &>> $LOGFILE
 echo "** Pushing container $IMG_PREFIX$image to registry $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST"
 PUSH=$(docker push $REGISTRY_URL$IMG_PREFIX$image:$VERSION_LATEST)  &>> $LOGFILE

@@ -1,10 +1,15 @@
 #!/bin/bash
 
 
-# check, how we are called to source our utilities
-DIRNAME=${DIRNAME:="script"}
-## this file contains configuration and functions
-source ${DIRNAME}/utils.sh
+# check, how we are called  
+DIRNAME=${DIRNAME:="script"} 
+if [ ! -f $DIRNAME/utils.sh ] 
+then 
+ echo "** ERROR don't call this script within this directory " 
+ exit 100 
+fi 
+## this file contains configuration and functions 
+source ${DIRNAME}/utils.sh 
 
 #is first parameter a valid zipkin service?
 image=$1
