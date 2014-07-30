@@ -26,8 +26,10 @@ WEB_PORT="8080"
 COLLECTOR_PORT="9410"
 COLLECTOR_MGT_PORT="9900"
 QUERY_PORT="9411"
+PRIVATE_SERVER_IP=$(hostname -i)
 ##FIXME http://localhost:$PUBLIC_PORT
-ROOT_URL="http://deb.local:$PUBLIC_PORT"
+#ROOT_URL="http://deb.local:$PUBLIC_PORT"
+ROOT_URL="http://$PRIVATE_SERVER_IP:$WEB_PORT"
 
 ######################################
 #All containers
