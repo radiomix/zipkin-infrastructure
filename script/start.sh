@@ -22,13 +22,13 @@ fi
 
 # first we inspect which containers are running
 # ----------------------------------------------------------- #
-echo "** Checking if container ${NAME_PREFIX}$image is present/running "
-RUNNING=$(docker ps -a  |  grep "${NAME_PREFIX}$image" )
+echo "** Checking if container ${IMG_PREFIX}$image is present/running "
+RUNNING=$(docker ps -a  |  grep "${IMG_PREFIX}$image" )
 if [ $? == "0" ]
  then
    echo "** Existing container " ${RUNNING[@]} &>> $LOGFILE
    echo "** Existing container " ${RUNNING[@]}
-   echo  "** Please stop and remove container ${NAME_PREFIX}$image by issuing commands "
+   echo  "** Please stop and remove container ${IMG_PREFIX}$image by issuing commands "
    echo  "**:> ${DIRNAME}/cleanup.sh $image"
    echo  "**  EXIT 100"
    exit 100
@@ -36,10 +36,10 @@ fi
 
 # than we inspect which containers are named allready
 # ----------------------------------------------------------- #
-docker ps  -a | grep Exited | grep "${NAME_PREFIX}$image"
+docker ps  -a | grep Exited | grep "${IMG_PREFIX}$image"
  if [ $? == "0" ]
  then
-   echo "** Please remove container ${NAME_PREFIX}$image by issuing command"
+   echo "** Please remove container ${IMG_PREFIX}$image by issuing command"
    echo "**:> ${DIRNAME}/cleanup.sh $image"
    echo "**  EXIT"
    exit 100
@@ -61,7 +61,8 @@ case "$image" in
 # ----------------------------------------------------------- #
  fb-scribe)
         echo "** Starting fb-scribe"
-        PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
+        #PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
+        PS=$(docker run -d -p 1463:1463 -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
 	;;
 # ----------------------------------------------------------- #
  cassandra)
