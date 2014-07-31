@@ -18,7 +18,14 @@ by Zipkin collector and Zipkin query.
 #### AWS security group
 As cassandra uses many ports a possible AWS security group is described by [DATASTAX](http://www.datastax.com/documentation/cassandra/2.0/cassandra/install/installAMISecurityGroup.html).
 
-
+#####FIXME
+- As the install script calls `gpg` communicating over port 11371, we have to make shure, this port is open inbound on the build host, and on the NAT-Server inbout as well as outbound.
+- File `/etc/init.d/cassandra` inside the container, which starts the proccess, generates errors:
+- It tries to set memory limit as unlimited. This generates an error: `ulimit: operation not permitted` 
+- Starting cassandra after uncommenting 'ulimit', we get error: 
+`set_caps(CAPS) failed for user 'cassandra'
+Service exit with a return value of 4`
+We therfore used '/usr/sbin/cassandra' to start the daemon in [run.sh](run.sh).
 #### Source
 For more details have a look at:
 <https://github.com/lispmeister/docker-zipkin/blob/master/README.md>

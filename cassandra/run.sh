@@ -14,8 +14,9 @@ cat $CONFIG
 echo "*** Cleaning up log files"
 rm -v /var/log/cassandra/*
 
-echo "*** Starting Cassandra"
-/etc/init.d/cassandra start
+echo "*** Starting Cassandra in background"
+#/etc/init.d/cassandra start
+/usr/sbin/cassandra 
 
 echo "*** Wait for Cassandra to boot"
 until grep -m1 -q "9160" /var/log/cassandra/system.log
@@ -27,11 +28,14 @@ echo "**** Cassandra is live!"
 
 echo "*** Importing Schema"
 cassandra-cli -host localhost -port 9160 -f /etc/cassandra/cassandra-schema.txt
-echo "*** Stopping Cassandra"
-/etc/init.d/cassandra stop
+#echo "*** Stopping Cassandra"
+#/etc/init.d/cassandra stop
 
-echo "*** Starting Cassandra in Foreground"
-/usr/sbin/cassandra -f
+#echo "*** Starting Cassandra in Foreground"
+#/usr/sbin/cassandra -f
+
+#show cassandra log
+tail -f /var/log/cassandra/system.log 
 
 
 
