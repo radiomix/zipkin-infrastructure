@@ -44,6 +44,8 @@ All images with the exception of zipkin-cassandra are sharing a base image:
 Once the containers are running you can connect to the collector on
 port 9410 via akka-tracing or other libraries that support Zipkin tracing. <https://github.com/levkhomich/akka-tracing>
 
+Deploying the zipkin-infrastructure *takes about 5 minutes* untill the container find each other.
+
 #### Dockerfile
 We try to place as many installation commands into Docker files, to ease the build process:
  * Each build step is frozen as an intermediate container
