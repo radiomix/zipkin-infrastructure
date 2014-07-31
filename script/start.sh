@@ -93,8 +93,8 @@ else
    echo "** ERROR: Container  ${NAME_PREFIX}$image NOT RUNNING!! " &>> $LOGFILE
    echo "** ERROR: Container  ${NAME_PREFIX}$image NOT RUNNING!! "
 fi
-docker ps  -a | grep $NAME_PRFIX$image &>> $LOGFILE
-docker ps  -a | grep $NAME_PRFIX$image
+docker ps  -a | grep $NAME_PREFIX$image &>> $LOGFILE
+docker ps  -a | grep $NAME_PREFIX$image
 date &>> $LOGFILE
 
 echo "** Finished to start container $image "
