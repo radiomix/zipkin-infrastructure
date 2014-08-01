@@ -30,6 +30,7 @@ PRIVATE_SERVER_IP=$(hostname -i)
 ##FIXME http://localhost:$PUBLIC_PORT
 #ROOT_URL="http://deb.local:$PUBLIC_PORT"
 ROOT_URL="http://$PRIVATE_SERVER_IP:$WEB_PORT"
+FB_SCRIBE_PORT="1463"
 
 ######################################
 #All containers
