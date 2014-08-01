@@ -1,7 +1,7 @@
 #
 # Dockerfile - Facebook Scribed
 #
-# Source:	Yongbok Kim <ruo91@yongbok.net>
+# Source:	Yongbok Kim <ruo91@yongbok.net> https://github.com/ruo91/docker-facebook-scribe
 
 FROM     	elemica/zipkin-base
 MAINTAINER 	Michael Klöckner <mkl AT im7 DOT de>
@@ -51,7 +51,21 @@ RUN echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /etc/profile
 WORKDIR /usr/local/src/scribe/lib/py 
 RUN python setup.py install
 
-##TODO configrue scribe
+# Copy conf 
+RUN mkdir /usr/local/scribe 
+RUN cp $scribe_src/examples/example2client.conf /usr/local/scribe/scribe.conf 
+ 
+# Supervisor 
+RUN mkdir -p /var/log/supervisor 
+ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf 
+
+ 
+# SSH 
+RUN mkdir /var/run/sshd 
+RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+
+# Root password
+RUN echo 'root:scribe' |chpasswd
 
 # Port
 EXPOSE 22 1463
