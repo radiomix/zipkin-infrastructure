@@ -16,6 +16,10 @@ source $DIRNAME/utils.sh
    done
  ;;
  # ----------------------------------------------------------- #
+   --fb-scribe| -f )
+    ${DIRNAME}/start.sh fb-scribe
+  ;;
+ # ----------------------------------------------------------- #
    --run| -r )
    for image in ${ZIPKIN_SERVICES[@]}; do
     ${DIRNAME}/start.sh $image
@@ -26,6 +30,8 @@ source $DIRNAME/utils.sh
    echo "** USAGE: 
    deploy.sh --cleanup | -c
                to cleanup old ${NAME_PREFIX}containers
+   deploy.sh --fb-scribe| -f
+               to only start ${NAME_PREFIX}fb-scribe container
    deploy.sh --run | -r
                to run new ${NAME_PREFIX}containers
    deploy.sh --help | -h

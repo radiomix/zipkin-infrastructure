@@ -21,8 +21,13 @@ As cassandra uses many ports a possible AWS security group is described by [DATA
 Building the scribe container takes between 10 and 15 minutes on a 2GHz CPU depending on the memory available. 
 The resulting image is about 800MB. We had to start an AMI of type `t2` to not run out of memory.
 #### Usage
-Two scripts build and deploy zipkin containers. To build them freshly just call [`./build.sh `](build.sh)` -f` and to pull them from registry call `./build.sh -r`.
-To deploy and run zipkin container on one host call [`./deploy.sh`](deploy.sh)` -r` and to cleanup old containers call `./deploy.sh -c`.
+Two scripts build and deploy zipkin containers. To only build the base container, all other containers depend on, type  [`./build.sh `](build.sh)` -b`. 
+To build all zipkin container call [`./build.sh `](build.sh)` -z` and to pull them from registry call `./build.sh -r`. 
+To only build fb-scribe container type  [`./build.sh `](build.sh)` -f`.
+To deploy and run zipkin container on one host call [`./deploy.sh`](deploy.sh)` -r` and to cleanup old containers call `./deploy.sh -c`. To only start
+container fb-scribe type  [`./deploy.sh`](deploy.sh)` -f`.
+
+
 ######TODO 
  * Check for container link between web and query?
  * Configure linking between fb-scribe (or akka) and collector (`COLLECTOR_PORT`) running on different docker hosts.
@@ -46,6 +51,8 @@ port 9410 via akka-tracing or other libraries that support Zipkin tracing. <http
 
 Deploying the zipkin-infrastructure *takes about 5 minutes* untill the container find each other.
 
+In directory script, you find convenient scripts to manipulate zipkin-containers. These scripts must be called from within this directory.
+For example  `script/build.sh base` would build the base container.
 #### Dockerfile
 We try to place as many installation commands into Docker files, to ease the build process:
  * Each build step is frozen as an intermediate container
