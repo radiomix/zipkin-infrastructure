@@ -61,8 +61,7 @@ case "$image" in
 # ----------------------------------------------------------- #
  fb-scribe)
         echo "** Starting fb-scribe"
-        #PS=$(docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
-        PS=$(docker run -d -p 1463:$FB_SCRIBE_PORT  --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" /bin/bash) &>> $LOGFILE
+        PS=$(docker run -d -p 10022:22 -p 1463:$FB_SCRIBE_PORT  --name="${NAME_PREFIX}fb-scribe" "${IMG_PREFIX}fb-scribe" ) &>> $LOGFILE
 	;;
 # ----------------------------------------------------------- #
  cassandra)

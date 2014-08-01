@@ -51,10 +51,14 @@ RUN echo "export LD_LIBRARY_PATH=/usr/local/lib" >> /etc/profile
 WORKDIR /usr/local/src/scribe/lib/py 
 RUN python setup.py install
 
-# Copy conf 
+# Copy conf
+ENV scribe_src /usr/local/src/scribe 
 RUN mkdir /usr/local/scribe 
-RUN cp $scribe_src/examples/example2client.conf /usr/local/scribe/scribe.conf 
- 
+RUN cp $scribe_src/examples/example2client.conf /usr/local/scribe/example2client.conf 
+RUN cp $scribe_src/examples/example1.conf /usr/local/scribe/scribe.conf 
+# example1.conf writes to /tmp/scribetest
+RUN mkdir /tmp/scribetest 
+
 # Supervisor 
 RUN mkdir -p /var/log/supervisor 
 ADD conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf 

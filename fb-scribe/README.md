@@ -13,7 +13,9 @@ Zipkin configures a scribe client in [scribe-client.conf](https://github.com/twi
 | `zipkin-fb-scribe`| 22|  | 
 | `zipkin-fb-scribe`| 1463|  listening for spans for the tracing messages| 
 
-
+#### Notes
+The container starts with the following configuration: It listens on port 1436 for tracing messages and writes them to the container directory /tmp/scribetest.
+The container can be accessed via ssh on port 10022 beeing mapped internally to the ssh port 22. Login: root with password 'scribe' is accepted!
 
 ## Thanks
 [gist to install scribe](https://gist.github.com/elprup/5642303)
